@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="a.out.js"></script>
+
+        <script>
+
+            function writeFib ( fib )
+            {
+                for ( let i=0; i<46; i++ )
+                {
+                    document.getElementById ( "output" ).
+                        innerHTML += fib ( i ) + "<br \\>";
+                }
+            }
+
+            Module.onRuntimeInitialized = _ =>
+            {
+                const fib = Module.cwrap ( 'fib', 'number', [ 'number' ]);
+
+                console.log ( fib ( 12 ) );
+
+                writeFib ( fib );
+            };
+        </script>
+    </head>
+        
+    <body>
+        <p>Hello</p>
+
+        <p id="output"></p>
+    </body>
+</html>
