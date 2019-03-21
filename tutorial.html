@@ -8,7 +8,7 @@
 <h2>Why use Web Assembly?</h2>
 
 <p>
-    Two major characteristics of Javascript within the browser are:
+    Two major characteristics of JavaScript within the browser are:
 </p>
 
 <ul>
@@ -28,7 +28,7 @@
 
 <p>
     These features are great for a ubiquitous web scripting language but
-    they are a hinderance when writing high-performance code for a game.
+    they are a hindrance when writing high-performance code for a game.
 </p>
 
 <p>
@@ -37,8 +37,31 @@
 </p>
 
 <p>
-    This allows us to take advantage of the portability of Javascript in
+    This allows us to take advantage of the portability of JavaScript in
     the web browser for our user interface while compiling the 
     computationally intensive portions of our game to machine code
     for extra speed.
 </p>
+
+<h2>Basic Web Assembly Build</h2>
+
+<p>
+    To get my first Web Assembly build running I followed 
+    <a href="https://developers.google.com/web/updates/2018/03/emscripting-a-c-library">this tutorial.</a>
+</p>
+
+<p>
+   The files for a simple Web Assembly project can be found in: 
+</p>
+
+<code>./001-fibonnacci/</code>
+
+<p>
+    To build and run the <em>Docker</em> image that contains the Web
+    Assembly compiler the following commands are used in a Linux terminal:
+</p>
+
+<code>
+    $ docker pull trzeci/emscripten
+    $ docker run --rm -v $(pwd):/src trzeci/emscripten emcc <emcc options here>
+</code>
