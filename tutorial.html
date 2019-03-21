@@ -1,0 +1,44 @@
+<h1>Learning Web Assembly</h1>  
+
+<p>
+   In this page I will document my attempt to learn how to build 
+   Web Assembly modules for use with my web development and games. 
+</p>
+
+<h2>Why use Web Assembly?</h2>
+
+<p>
+    Two major characteristics of Javascript within the browser are:
+</p>
+
+<ul>
+    <li>
+        <strong>Interpreted</strong> - The behaviour of the code is evaluated
+        during run-time.  It is difficult for an interpreter to
+        optimize performance.
+    </li>
+    
+    <li>
+        <strong>Dynamically Typed</strong> - Variables can change their
+        data type during execution.  Their type must be checked before each 
+        operation.  This can add overhead to loops with lots of maths
+        inside.
+    </li>
+</ul>
+
+<p>
+    These features are great for a ubiquitous web scripting language but
+    they are a hinderance when writing high-performance code for a game.
+</p>
+
+<p>
+    Web-Assembly allows us to compile a statically typed language such as
+    C++ to a special machine code that is executed within the browser.
+</p>
+
+<p>
+    This allows us to take advantage of the portability of Javascript in
+    the web browser for our user interface while compiling the 
+    computationally intensive portions of our game to machine code
+    for extra speed.
+</p>
