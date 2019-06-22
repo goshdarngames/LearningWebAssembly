@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <script src="p5.min.js"></script>
+
+        <script src="a.out.js"></script>
+        
+        <script src="sketch.js"></script>
+
+        <script>
+
+            Module.onRuntimeInitialized = _ =>
+            {
+                window.mandelbrot = 
+                    Module.cwrap ( 'mandelbrot', 'number', 
+                         [ 'number', 'number', 'number', 'number', 
+                           'number', 'number', 'number' ]);
+                
+                const sketch = new p5 ( window.p5js_sketch.grid_p5 );
+            };
+
+        </script>
+
+    </head>
+        
+    <body>
+        <p id="output"></p>
+    </body>
+</html>
