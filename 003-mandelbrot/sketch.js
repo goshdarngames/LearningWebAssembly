@@ -12,11 +12,24 @@
 
         p.draw = function ()
         {
+            let numIter = 10;
+            let targetX = 0;
+            let targetY = 0;
+            let range = 2;
+            let gridSize = p.canvasSize [ 0 ];
+
             for ( i = 0; i < p.canvasSize[0]; i++ )
             {
-                for ( j = 0; j < p.canvasSize[0]; j++ )
+                for ( j = 0; j < p.canvasSize[1]; j++ )
                 {
-                    if ( window.mandelbrot ( 0, 0, 0, 0, 0, i, j ) == 1 )
+                    let n = window.mandelbrot ( numIter, 
+                                                targetX,
+                                                targetY,
+                                                range,
+                                                gridSize,
+                                                i, j       );
+
+                    if ( n == 0 )
                     {
                         p.set ( i, j, p.color ( 0 ) );
                     }
