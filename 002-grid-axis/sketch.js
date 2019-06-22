@@ -5,18 +5,6 @@
     {
         p.canvasSize = [ 400, 400 ]
         
-        p. gridF = function ( x, y )
-        { 
-            if ( x == 0 )
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-
         p.setup = function ()
         {
             p.createCanvas ( p.canvasSize [ 0 ], p.canvasSize [ 1 ] );
@@ -28,7 +16,7 @@
             {
                 for ( j = 0; j < p.canvasSize[0]; j++ )
                 {
-                    if ( p.gridF ( i, j ) == 1 )
+                    if ( window.gridF ( i, j ) == 1 )
                     {
                         p.set ( i, j, p.color ( 0 ) );
                     }

@@ -12,7 +12,7 @@
 
             Module.onRuntimeInitialized = _ =>
             {
-                const gridF = Module.cwrap ( 'gridF', 'number', 
+                window.gridF = Module.cwrap ( 'gridF', 'number', 
                                                   [ 'number', 'number' ]);
                 
                 const sketch = new p5 ( window.p5js_sketch.grid_p5 );
