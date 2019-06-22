@@ -6,17 +6,19 @@
 
         <script src="a.out.js"></script>
         
+        <script src="sketch.js"></script>
+
         <script>
 
             Module.onRuntimeInitialized = _ =>
             {
-                const gridF = Module.cwrap ( 'f', 'number', 
+                const gridF = Module.cwrap ( 'gridF', 'number', 
                                                   [ 'number', 'number' ]);
+                
+                const sketch = new p5 ( window.p5js_sketch.grid_p5 );
             };
 
         </script>
-
-        <script src="sketch.js"></script>
 
     </head>
         

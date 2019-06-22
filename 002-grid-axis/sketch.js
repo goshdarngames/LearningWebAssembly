@@ -1,22 +1,41 @@
-let canvasSize = [ 400, 400 ]
-
-function setup ()
+( function ( p5js_sketch, undefined )
 {
-    createCanvas ( canvasSize [ 0 ], canvasSize [ 1 ] );
-}
 
-function draw ()
-{
-    for ( i = 0; i < canvasSize[0]; i++ )
+    p5js_sketch.grid_p5 = ( p ) =>
     {
-        for ( j = 0; j < canvasSize[0]; j++ )
-        {
-            if ( gridF ( i, j ) == 1 )
+        p.canvasSize = [ 400, 400 ]
+        
+        p. gridF = function ( x, y )
+        { 
+            if ( x == 0 )
             {
-                set ( i, j, color ( 0 ) );
+                return 1;
+            }
+            else
+            {
+                return 0;
             }
         }
-    }
 
-    updatePixels ();
-}
+        p.setup = function ()
+        {
+            p.createCanvas ( p.canvasSize [ 0 ], p.canvasSize [ 1 ] );
+        }
+
+        p.draw = function ()
+        {
+            for ( i = 0; i < p.canvasSize[0]; i++ )
+            {
+                for ( j = 0; j < p.canvasSize[0]; j++ )
+                {
+                    if ( p.gridF ( i, j ) == 1 )
+                    {
+                        p.set ( i, j, p.color ( 0 ) );
+                    }
+                }
+            }
+
+            p.updatePixels ();
+        }
+    };
+} ( window.p5js_sketch = window.p5js_sketch || {} ))

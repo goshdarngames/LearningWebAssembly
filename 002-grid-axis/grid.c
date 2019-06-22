@@ -1,7 +1,7 @@
 #include <emscripten.h>
 
 EMSCRIPTEN_KEEPALIVE
-int f ( int x, int y )
+int gridF ( int x, int y )
 {
 	if ( x == 200 || y == 200 )
 	{
