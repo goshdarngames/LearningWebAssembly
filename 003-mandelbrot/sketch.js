@@ -12,7 +12,7 @@
 
         p.draw = function ()
         {
-            let numIter = 10;
+            let numIter = 100;
             let targetX = 0;
             let targetY = 0;
             let range = 2;

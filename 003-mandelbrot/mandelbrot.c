@@ -15,14 +15,15 @@ struct Complex
 
 struct Complex mult ( struct Complex c1, struct Complex c2 )
 {
-    struct Complex r = { 0, 0 };
+    struct Complex r = { ( c1.real*c2.real ) - ( c1.imag*c2.imag ), 
+                         ( c1.real*c1.imag ) + ( c2.real*c2.imag ) };
 
     return r;
 }
 
 struct Complex add ( struct Complex c1, struct Complex c2 )
 {
-    struct Complex r = { 0, 0 };
+    struct Complex r = { c1.real+c2.real, c1.imag+c2.imag };
 
     return r;
 }
@@ -49,6 +50,13 @@ int mandelbrot ( int numIter, float targetX, float targetY, float range,
 
     while ( n > 0 )
     {
+        z = add ( mult ( z, z ), c );
+
+        if ( z.real > 2 )
+        {
+            break;
+        }
+
         n--;            
     }
 
