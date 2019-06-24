@@ -8,16 +8,11 @@
             targetX  : 0,
             targetY  : 0,
             range    : 2,
-            gridSize : [ 400, 400 ]
+            gridSize : [ 400, 400 ],
+            image    : undefined
         };
 
-        p.setup = function ()
-        {
-            p.createCanvas ( sketch_data.gridSize [ 0 ],
-                             sketch_data.gridSize [ 1 ] );
-        }
-
-        p.draw = function ()
+        let renderMandelbrot = function ()
         {
             for ( i = 0; i < sketch_data.gridSize[0]; i++ )
             {
@@ -33,12 +28,29 @@
 
                     if ( n == 0 )
                     {
-                        p.set ( i, j, p.color ( 0 ) );
+                        sketch_data.image.set ( i, j, p.color ( 0 ) );
                     }
                 }
             }
 
-            p.updatePixels ();
+            sketch_data.image.updatePixels ();
+        };
+
+        p.setup = function ()
+        {
+            p.createCanvas ( sketch_data.gridSize [ 0 ],
+                             sketch_data.gridSize [ 1 ] );
+
+            sketch_data.image = p.createImage ( sketch_data.gridSize [ 0 ],
+                                                sketch_data.gridSize [ 1 ] );
+            renderMandelbrot ();
         }
+
+        p.draw = function ()
+        {
+            p.image ( sketch_data.image, 0, 0 );
+        }
+
+        
     };
 } ( window.p5js_sketch = window.p5js_sketch || {} ))
