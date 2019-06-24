@@ -4,11 +4,11 @@
     {
         let sketch_data = 
         {
-            numIter  : 100,
+            numIter  : 300,
             targetX  : 0,
             targetY  : 0,
-            range    : 2,
-            gridSize : [ 400, 400 ],
+            range    : 3,
+            gridSize : [ 800, 800 ],
             image    : undefined
         };
 

@@ -9,8 +9,8 @@
 
 struct Complex
 {
-    float real;
-    float imag;
+    long double real;
+    long double imag;
 };
 
 struct Complex mult ( struct Complex c1, struct Complex c2 )
@@ -34,7 +34,7 @@ struct Complex add ( struct Complex c1, struct Complex c2 )
  ***************************************************************************/
 
 EMSCRIPTEN_KEEPALIVE
-int mandelbrot ( int numIter, float targetX, float targetY, float range,
+int mandelbrot ( int numIter, long double targetX, long double targetY, long double range,
                  int gridSize, int x, int y )
 {
     int n = numIter;
@@ -43,8 +43,8 @@ int mandelbrot ( int numIter, float targetX, float targetY, float range,
 
     //The value of C is calculated as an offset from the target coord
     //by a fraction of the total 'range' of values within the grid
-    float cReal = targetX-(range/2)+(range/gridSize)*x;
-    float cImag = targetY-(range/2)+(range/gridSize)*y;
+    long double cReal = targetX-(range/2)+(range/gridSize)*x;
+    long double cImag = targetY-(range/2)+(range/gridSize)*y;
 
     struct Complex c = { cReal, cImag };
 
