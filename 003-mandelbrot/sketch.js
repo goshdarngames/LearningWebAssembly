@@ -1,33 +1,35 @@
 ( function ( p5js_sketch, undefined )
 {
-
     p5js_sketch.grid_p5 = ( p ) =>
     {
-        p.canvasSize = [ 400, 400 ]
-        
+        let sketch_data = 
+        {
+            numIter  : 100,
+            targetX  : 0,
+            targetY  : 0,
+            range    : 2,
+            gridSize : [ 400, 400 ]
+        };
+
         p.setup = function ()
         {
-            p.createCanvas ( p.canvasSize [ 0 ], p.canvasSize [ 1 ] );
+            p.createCanvas ( sketch_data.gridSize [ 0 ],
+                             sketch_data.gridSize [ 1 ] );
         }
 
         p.draw = function ()
         {
-            let numIter = 100;
-            let targetX = 0;
-            let targetY = 0;
-            let range = 2;
-            let gridSize = p.canvasSize [ 0 ];
-
-            for ( i = 0; i < p.canvasSize[0]; i++ )
+            for ( i = 0; i < sketch_data.gridSize[0]; i++ )
             {
-                for ( j = 0; j < p.canvasSize[1]; j++ )
+                for ( j = 0; j < sketch_data.gridSize[1]; j++ )
                 {
-                    let n = window.mandelbrot ( numIter, 
-                                                targetX,
-                                                targetY,
-                                                range,
-                                                gridSize,
-                                                i, j       );
+                    let n = window.mandelbrot ( 
+                        sketch_data.numIter, 
+                        sketch_data.targetX,
+                        sketch_data.targetY,
+                        sketch_data.range,
+                        sketch_data.gridSize[0],
+                        i, j                  );
 
                     if ( n == 0 )
                     {
