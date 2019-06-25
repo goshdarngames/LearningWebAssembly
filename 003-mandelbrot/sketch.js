@@ -6,12 +6,17 @@
      */
     p5js_sketch.render_data =
     {
-        numIter  : 300,
+        numIter  : 30000,
         targetX  : -0.7436,
         targetY  : 0.1102,
-        range    : 0.005,
-        gridSize : [ 800, 800 ],
-        image    : undefined
+        range    : 4,
+        gridSize : [ 1080, 1080 ],
+        image    : undefined,
+        colors  : [ '#ff0000',
+                    '#777700',
+                    '#00ff00',
+                    '#007777',
+                    '#0000ff' ]
     };
 
     p5js_sketch.grid_p5 = ( p ) =>
@@ -39,7 +44,12 @@
                     }
                     else
                     {
-                        r_data.image.set ( i, j, p.color ( 255 ) );
+                        let setIdx = 
+                            Math.floor ( n % r_data.colors.length );
+
+                        let setC = r_data.colors [ setIdx ];
+
+                        r_data.image.set ( i, j, p.color ( setC ) );
                     }
 
                 }
