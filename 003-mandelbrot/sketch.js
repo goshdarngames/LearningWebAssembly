@@ -5,9 +5,9 @@
         let sketch_data = 
         {
             numIter  : 300,
-            targetX  : 0,
-            targetY  : 0,
-            range    : 3,
+            targetX  : -0.7436,
+            targetY  : 0.1102,
+            range    : 0.005,
             gridSize : [ 800, 800 ],
             image    : undefined
         };

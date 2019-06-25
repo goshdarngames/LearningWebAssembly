@@ -53,7 +53,7 @@ int mandelbrot ( int numIter, long double targetX, long double targetY, long dou
     {
         z = add ( mult ( z, z ), c );
 
-        if ( fabsl ( z.real ) > 4.0 )
+        if ( fabsl ( z.real ) > 2.0 )
         {
             break;
         }
