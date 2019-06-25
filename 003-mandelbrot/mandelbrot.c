@@ -1,4 +1,5 @@
 #include <emscripten.h>
+#include <math.h>
 
 /****************************************************************************
  * Complex Numbers
@@ -52,7 +53,7 @@ int mandelbrot ( int numIter, long double targetX, long double targetY, long dou
     {
         z = add ( mult ( z, z ), c );
 
-        if ( z.real > 2 )
+        if ( fabsl ( z.real ) > 4.0 )
         {
             break;
         }
