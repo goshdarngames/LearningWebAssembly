@@ -30,6 +30,11 @@
                     {
                         sketch_data.image.set ( i, j, p.color ( 0 ) );
                     }
+                    else
+                    {
+                        sketch_data.image.set ( i, j, p.color ( 255 ) );
+                    }
+
                 }
             }
 
@@ -38,8 +43,10 @@
 
         p.setup = function ()
         {
-            p.createCanvas ( sketch_data.gridSize [ 0 ],
-                             sketch_data.gridSize [ 1 ] );
+            let canvas = p.createCanvas ( sketch_data.gridSize [ 0 ],
+                                          sketch_data.gridSize [ 1 ] );
+
+            canvas.parent ( 'canvasDiv' );
 
             sketch_data.image = p.createImage ( sketch_data.gridSize [ 0 ],
                                                 sketch_data.gridSize [ 1 ] );
