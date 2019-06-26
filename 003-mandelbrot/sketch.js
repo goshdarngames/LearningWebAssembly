@@ -1,32 +1,29 @@
 ( function ( p5js_sketch, undefined )
 {
-    /**
-     * Stores data for the render process in a public field so that it
-     * may be displayed on the GUI.
-     */
-    p5js_sketch.render_data =
-    {
-        numIter  : 300,
-        targetX  : -0.7436,
-        targetY  : 0.1102,
-        range    : 3.5,
-        escape   : 300,
-        gridSize : [ 1080, 1080 ],
-        image    : undefined,
-        colors  : [ '#ff0000',
-                    '#ffff00',
-                    '#00ff00',
-                    '#00ffff',
-                    '#0000ff' ]
-    };
-
     p5js_sketch.grid_p5 = ( p ) =>
     {
-        //Shorter name for slightly more readable code
-        let r_data = p5js_sketch.render_data;
+        let imageBuffer = undefined;
+
+        let get_render_data =  function ()
+        {
+            //load render data into this struct
+            let r_data = {};
+            
+            //copy across the 'value' fields from each SketchParam
+            Object.keys ( p5js_sketch.params ).forEach (
+                ( key ) => 
+                {
+                    r_data [ key ] = p5js_sketch.params [ key ].value;
+                }
+            );
+            
+            return r_data;
+        }
 
         let renderMandelbrot = function ()
         {
+            let r_data = get_render_data ();
+
             for ( i = 0; i < r_data.gridSize[0]; i++ )
             {
                 for ( j = 0; j < r_data.gridSize[1]; j++ )
@@ -42,7 +39,7 @@
 
                     if ( n == 0 )
                     {
-                        r_data.image.set ( i, j, p.color ( 0 ) );
+                        imageBuffer.set ( i, j, p.color ( 0 ) );
                     }
                     else
                     {
@@ -51,30 +48,34 @@
 
                         let setC = r_data.colors [ setIdx ];
 
-                        r_data.image.set ( i, j, p.color ( setC ) );
+                        imageBuffer.set ( i, j, p.color ( setC ) );
                     }
 
                 }
             }
 
-            r_data.image.updatePixels ();
+            imageBuffer.updatePixels ();
         };
 
         p.setup = function ()
         {
+            let r_data = get_render_data ();
+
             let canvas = p.createCanvas ( r_data.gridSize [ 0 ],
                                           r_data.gridSize [ 1 ] );
 
             canvas.parent ( 'canvasDiv' );
 
-            r_data.image = p.createImage ( r_data.gridSize [ 0 ],
+            imageBuffer = p.createImage ( r_data.gridSize [ 0 ],
                                            r_data.gridSize [ 1 ] );
             renderMandelbrot ();
         }
 
         p.draw = function ()
         {
-            p.image ( r_data.image, 0, 0 );
+            let r_data = get_render_data ();
+
+            p.image ( imageBuffer, 0, 0 );
         }
 
         
