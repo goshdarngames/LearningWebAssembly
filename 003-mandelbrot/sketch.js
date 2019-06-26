@@ -6,16 +6,17 @@
      */
     p5js_sketch.render_data =
     {
-        numIter  : 30000,
+        numIter  : 300,
         targetX  : -0.7436,
         targetY  : 0.1102,
-        range    : 4,
+        range    : 3.5,
+        escape   : 300,
         gridSize : [ 1080, 1080 ],
         image    : undefined,
         colors  : [ '#ff0000',
-                    '#777700',
+                    '#ffff00',
                     '#00ff00',
-                    '#007777',
+                    '#00ffff',
                     '#0000ff' ]
     };
 
@@ -35,6 +36,7 @@
                         r_data.targetX,
                         r_data.targetY,
                         r_data.range,
+                        r_data.escape,
                         r_data.gridSize[0],
                         i, j                  );
 

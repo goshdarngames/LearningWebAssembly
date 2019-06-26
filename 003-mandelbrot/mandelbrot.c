@@ -35,7 +35,8 @@ struct Complex add ( struct Complex c1, struct Complex c2 )
  ***************************************************************************/
 
 EMSCRIPTEN_KEEPALIVE
-int mandelbrot ( int numIter, long double targetX, long double targetY, long double range,
+int mandelbrot ( int numIter, long double targetX, long double targetY, 
+                 long double range, long double escape,
                  int gridSize, int x, int y )
 {
     int n = numIter;
@@ -53,7 +54,7 @@ int mandelbrot ( int numIter, long double targetX, long double targetY, long dou
     {
         z = add ( mult ( z, z ), c );
 
-        if ( fabsl ( z.real ) > 2.0 )
+        if ( fabsl ( z.real ) > escape )
         {
             break;
         }
