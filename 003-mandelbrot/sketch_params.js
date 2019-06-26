@@ -1,5 +1,9 @@
 ( function ( p5js_sketch, undefined )
 {
+    /************************************************************************
+     * Sketch Param Data Type
+     ***********************************************************************/
+
     let SketchParam = function ( display_name,
                                  value,
                                  html             )
@@ -15,29 +19,27 @@
         this.html = html;
     };
 
-    p5js_sketch.params =
-    {
-        numIter  : new SketchParam ( "numIter", 300 ),
-        targetX  : new SketchParam ( "name", -0.7436 ),
-        targetY  : new SketchParam ( "name", 0.1102 ),
-        range    : new SketchParam ( "name", 3.5 ),
-        escape   : new SketchParam ( "name", 300 ),
-        gridSize : new SketchParam ( "name", [ 1080, 1080 ] ),
-        colors   : new SketchParam ( "name", [ '#ff0000',
-                                               '#ffff00',
-                                               '#00ff00',
-                                               '#00ffff',
-                                               '#0000ff' ] )
-    };
+    /************************************************************************
+     * HTML generation
+     ***********************************************************************/
 
     p5js_sketch.getHtmlParamForm = function ()
     {
         html = "<form>";
 
-        html += "<p>";
-        html += htmlNumberInput ( "numIter", p5js_sketch.params.numIter );
-        html += "</p>";
+        Object.keys ( p5js_sketch.params ).forEach (
+            ( key ) => 
+            {
+                paramData = p5js_sketch.params [ key ];
 
+                html += "<p>";
+
+                html += paramData.html ( key, paramData );
+
+                html += "</p>";
+            }
+        );
+        
         html += "<input type='submit' value='Render' />";
 
         html += "</form>";
@@ -59,8 +61,28 @@
         return html;
     };
 
-    let listNumberInput = function ( paramKey, paramData )
+    let htmlListInput = function ( paramKey, paramData )
     {
         return "";
     }
+
+    /************************************************************************
+     * Sketch Params and Inital Data
+     ***********************************************************************/
+
+    p5js_sketch.params =
+    {
+        numIter  : new SketchParam ( "numIter", 300, htmlNumberInput ),
+        targetX  : new SketchParam ( "X", -0.7436, htmlNumberInput ),
+        targetY  : new SketchParam ( "Y", 0.1102, htmlNumberInput ),
+        range    : new SketchParam ( "Range", 3.5, htmlNumberInput ),
+        escape   : new SketchParam ( "Escape", 300, htmlNumberInput ),
+        gridSize : new SketchParam ( "GridSize", [ 1080, 1080 ], htmlListInput ),
+        colors   : new SketchParam ( "Colors", [ '#ff0000',
+                                               '#ffff00',
+                                               '#00ff00',
+                                               '#00ffff',
+                                               '#0000ff' ], htmlListInput )
+    };
+
 } ( window.p5js_sketch = window.p5js_sketch || {} ))
