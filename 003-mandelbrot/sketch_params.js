@@ -6,7 +6,8 @@
 
     let SketchParam = function ( display_name,
                                  value,
-                                 html             )
+                                 html,
+                                 update         )
     {
         //Text on the label
         this.display_name = display_name;
@@ -17,6 +18,10 @@
         //Function that should be called to get the html for the
         //GUI item
         this.html = html;
+
+        //Function that should be called to update the displayed value
+        //for the parameters
+        this.update = update;
     };
 
     /************************************************************************
@@ -73,28 +78,69 @@
         return html;
     }
 
+    
+    /************************************************************************
+     * Value Update Functions
+     ***********************************************************************/
+
+    let singleValueUpdate = function ( paramKey )
+    {
+        let domObject = document.getElementsByName ( paramKey ) [ 0 ];
+
+        domObject.value = p5js_sketch.params [ paramKey ].value;
+    };
+
+    let listUpdate = function ( paramKey )
+    {
+        let paramValues = p5js_sketch.params [ paramKey ].value;
+
+        paramValues.forEach ( ( val, idx ) =>
+        {
+            let fieldName = paramKey+"_"+idx;
+
+            let domObject = document.getElementsByName ( fieldName ) [ 0 ];
+
+            domObject.value = paramValues [ idx ];
+        });
+    };
+
+    p5js_sketch.updateParamForm = function ()
+    {
+        Object.keys ( p5js_sketch.params ).forEach ( 
+            ( key ) => 
+            {
+                p5js_sketch.params [ key ].update ( key );
+            }
+        );
+    };
+
     /************************************************************************
      * Sketch Params and Inital Data
      ***********************************************************************/
 
     p5js_sketch.params =
     {
-        numIter  : new SketchParam ( "Iterations", 300, htmlNumberInput ),
+        numIter  : new SketchParam ( 
+            "Iterations", 300, htmlNumberInput, singleValueUpdate ),
 
         target   : new SketchParam ( "Target", [ -0.7436, 0.1102 ],
-                                     htmlListInput ),
+                                     htmlListInput, listUpdate ),
 
-        range    : new SketchParam ( "Range", 3.5, htmlNumberInput ),
+        range    : new SketchParam ( 
+            "Range", 3.5, htmlNumberInput, singleValueUpdate ),
 
-        escape   : new SketchParam ( "Escape", 300, htmlNumberInput ),
+        escape   : new SketchParam ( 
+            "Escape", 300, htmlNumberInput, singleValueUpdate ),
 
-        gridSize : new SketchParam ( "GridSize", [ 1080, 1080 ], htmlListInput ),
+        gridSize : new SketchParam ( 
+            "GridSize", [ 1080, 1080 ], htmlListInput, listUpdate ),
 
-        colors   : new SketchParam ( "Colors", [ '#ff0000',
-                                               '#ffff00',
-                                               '#00ff00',
-                                               '#00ffff',
-                                               '#0000ff' ], htmlListInput )
+        colors   : new SketchParam ( 
+            "Colors", [ '#ff0000',
+                        '#ffff00',
+                        '#00ff00',
+                        '#00ffff',
+                        '#0000ff' ], htmlListInput, listUpdate )
     };
 
 } ( window.p5js_sketch = window.p5js_sketch || {} ))
