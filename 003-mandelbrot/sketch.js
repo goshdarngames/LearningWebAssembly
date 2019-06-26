@@ -30,8 +30,8 @@
                 {
                     let n = window.mandelbrot ( 
                         r_data.numIter, 
-                        r_data.targetX,
-                        r_data.targetY,
+                        r_data.target [ 0 ],
+                        r_data.target [ 1 ],
                         r_data.range,
                         r_data.escape,
                         r_data.gridSize[0],

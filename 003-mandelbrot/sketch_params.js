@@ -79,12 +79,17 @@
 
     p5js_sketch.params =
     {
-        numIter  : new SketchParam ( "numIter", 300, htmlNumberInput ),
-        targetX  : new SketchParam ( "X", -0.7436, htmlNumberInput ),
-        targetY  : new SketchParam ( "Y", 0.1102, htmlNumberInput ),
+        numIter  : new SketchParam ( "Iterations", 300, htmlNumberInput ),
+
+        target   : new SketchParam ( "Target", [ -0.7436, 0.1102 ],
+                                     htmlListInput ),
+
         range    : new SketchParam ( "Range", 3.5, htmlNumberInput ),
+
         escape   : new SketchParam ( "Escape", 300, htmlNumberInput ),
+
         gridSize : new SketchParam ( "GridSize", [ 1080, 1080 ], htmlListInput ),
+
         colors   : new SketchParam ( "Colors", [ '#ff0000',
                                                '#ffff00',
                                                '#00ff00',
