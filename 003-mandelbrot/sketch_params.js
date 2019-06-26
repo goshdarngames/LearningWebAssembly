@@ -56,14 +56,21 @@
     {
         html = htmlLabel ( paramData.display_name );
 
-        html += "<input type='text' name='paramKey'>";
+        html += "<input type='text' name='"+paramKey+"'>";
 
         return html;
     };
 
     let htmlListInput = function ( paramKey, paramData )
     {
-        return "";
+        html = htmlLabel ( paramData.display_name );
+
+        paramData.value.forEach ( ( val, idx ) =>
+        {
+            html += "<input type='text' name='"+paramKey+"_"+idx+"'>";
+        });
+
+        return html;
     }
 
     /************************************************************************
