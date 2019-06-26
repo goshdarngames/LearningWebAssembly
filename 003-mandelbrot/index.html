@@ -5,7 +5,7 @@
         <script src="p5.min.js"></script>
 
         <script src="a.out.js"></script>
-        
+
         <script src="sketch.js"></script>
         <script src="sketch_params.js"></script>
 
@@ -18,6 +18,12 @@
                          [ 'number', 'number', 'number', 'number', 
                            'number', 'number', 'number' ]);
                 
+                
+                //create input form
+                document.getElementById ( 'renderOptions' )
+                   .innerHTML += window.p5js_sketch.getHtmlParamForm ();
+                
+
                 const sketch = new p5 ( window.p5js_sketch.grid_p5 );
             };
 
@@ -33,28 +39,6 @@
         </div>
 
         <div id="renderOptions">
-
-            <form>
-                <p>
-                    <label>TargetX</label>
-                    <input type="text" name="fname">
-                </p>
-                <p>
-                    <label>TargetY</label>
-                    <input type="text" name="fname">
-                </p>
-                <p>
-                    <label>Range</label>
-                    <input type="text" name="fname">
-                </p>
-                <p>
-                    <label>Iterations</label>
-                    <input type="text" name="fname">
-                </p>
-               
-                <input type="submit" value="Render" />
-                
-            </form>
 
         </div>
     </body>
