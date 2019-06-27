@@ -1,3 +1,20 @@
+/****************************************************************************
+ * sketch_params.js
+ *---------------------------------------------------------------------------
+ * The sketch parameters is a data structure that holds all the values
+ * that the user may want to tweak  when rendering the fractal.
+ *
+ * The SketchParam struct defines the data for each parameter.  It contains
+ * things like the value and label as well as functions that can be used
+ * to generate a html form element for the parameter and functions for
+ * updating the form element with the latest value and submitting new values
+ * from the form.
+ *
+ * The structure is a little unwieldy at present and should be refactored
+ * to more transparently handle different data types.  The underlying
+ * values need to be translated between the form and the renderer.
+ ***************************************************************************/
+
 ( function ( p5js_sketch, undefined )
 {
     /************************************************************************
@@ -7,7 +24,8 @@
     let SketchParam = function ( display_name,
                                  value,
                                  html,
-                                 update         )
+                                 update,
+                                 submit         )
     {
         //Text on the label
         this.display_name = display_name;
@@ -22,6 +40,11 @@
         //Function that should be called to update the displayed value
         //for the parameters
         this.update = update;
+
+
+        //Function that should be called to write the value from the form
+        //to the render parameters
+        this.submit = submit;
     };
 
     /************************************************************************
@@ -30,7 +53,8 @@
 
     p5js_sketch.getHtmlParamForm = function ()
     {
-        html = "<form>";
+        //Note: onsubmit=return false prevents the page being reloaded
+        html = "<form onsubmit='return false' >";
 
         Object.keys ( p5js_sketch.params ).forEach (
             ( key ) => 
@@ -44,8 +68,9 @@
                 html += "</p>";
             }
         );
-        
-        html += "<input type='submit' value='Render' />";
+
+        html += "<input type='submit' value='Render' "+
+                "onclick='p5js_sketch.renderButtonCallback ()' />";
 
         html += "</form>";
         
@@ -114,6 +139,50 @@
         );
     };
 
+    let singleValueSubmit = function ( paramKey )
+    {
+        let domObject = document.getElementsByName ( paramKey ) [ 0 ];
+
+        p5js_sketch.params [ paramKey ].value =  domObject.value;
+    };
+
+    let listValueSubmit = function ( paramKey )
+    {
+        let paramValues = p5js_sketch.params [ paramKey ].value;
+
+        let formValues = paramValues.map ( ( val, idx ) =>
+        {
+            let fieldName = paramKey+"_"+idx;
+
+            let domObject = document.getElementsByName ( fieldName ) [ 0 ];
+
+            return domObject.value;
+        });
+
+        formValues.forEach( ( val, idx ) =>
+        {
+            p5js_sketch.params [ paramKey ].value [ idx ] = val;
+        });
+
+    };
+
+    p5js_sketch.submitParamForm = function ()
+    {
+        Object.keys ( p5js_sketch.params ).forEach ( 
+            ( key ) => 
+            {
+                p5js_sketch.params [ key ].submit ( key );
+            }
+        );
+    };
+
+    p5js_sketch.renderButtonCallback = function ()
+    {
+        p5js_sketch.submitParamForm ();
+
+        p5js_sketch.renderMandelbrot ();
+    };
+
     /************************************************************************
      * Sketch Params and Inital Data
      ***********************************************************************/
@@ -121,26 +190,32 @@
     p5js_sketch.params =
     {
         numIter  : new SketchParam ( 
-            "Iterations", 300, htmlNumberInput, singleValueUpdate ),
+            "Iterations", 300, htmlNumberInput, 
+            singleValueUpdate, singleValueSubmit ),
 
-        target   : new SketchParam ( "Target", [ -0.7436, 0.1102 ],
-                                     htmlListInput, listUpdate ),
+        target   : new SketchParam (
+            "Target", [ -0.7436, 0.1102 ],
+            htmlListInput, listUpdate, listValueSubmit ),
 
         range    : new SketchParam ( 
-            "Range", 3.5, htmlNumberInput, singleValueUpdate ),
+            "Range", 3.5, 
+            htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         escape   : new SketchParam ( 
-            "Escape", 300, htmlNumberInput, singleValueUpdate ),
+            "Escape", 300, 
+            htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         gridSize : new SketchParam ( 
-            "GridSize", [ 1080, 1080 ], htmlListInput, listUpdate ),
+            "GridSize", [ 1080, 1080 ], 
+            htmlListInput, listUpdate, listValueSubmit ),
 
         colors   : new SketchParam ( 
             "Colors", [ '#ff0000',
                         '#ffff00',
                         '#00ff00',
                         '#00ffff',
-                        '#0000ff' ], htmlListInput, listUpdate )
+                        '#0000ff' ], 
+            htmlListInput, listUpdate, listValueSubmit )
     };
 
 } ( window.p5js_sketch = window.p5js_sketch || {} ))

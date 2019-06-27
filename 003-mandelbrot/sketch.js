@@ -20,7 +20,7 @@
             return r_data;
         }
 
-        let renderMandelbrot = function ()
+        p5js_sketch.renderMandelbrot = function ()
         {
             let r_data = get_render_data ();
 
@@ -67,8 +67,9 @@
             canvas.parent ( 'canvasDiv' );
 
             imageBuffer = p.createImage ( r_data.gridSize [ 0 ],
-                                           r_data.gridSize [ 1 ] );
-            renderMandelbrot ();
+                                          r_data.gridSize [ 1 ] );
+
+            p5js_sketch.renderMandelbrot ();
         }
 
         p.draw = function ()
