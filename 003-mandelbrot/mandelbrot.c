@@ -29,6 +29,11 @@ struct Complex add ( struct Complex c1, struct Complex c2 )
     return r;
 }
 
+long double mag ( struct Complex z )
+{
+    return z.real * z.real + z.imag * z.imag;
+};
+
 /****************************************************************************
  * Exported function
  * - This function will be availabled in the Javascript code.
@@ -54,7 +59,7 @@ int mandelbrot ( int numIter, long double targetX, long double targetY,
     {
         z = add ( mult ( z, z ), c );
 
-        if ( fabsl ( z.real ) > escape )
+        if ( mag ( z ) > escape )
         {
             break;
         }
