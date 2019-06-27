@@ -209,12 +209,14 @@
             "GridSize", [ 1080, 1080 ], 
             htmlListInput, listUpdate, listValueSubmit ),
 
+        //https://www.colourlovers.com/palette/726411/fire_within
+
         colors   : new SketchParam ( 
-            "Colors", [ '#ff0000',
-                        '#ffff00',
-                        '#00ff00',
-                        '#00ffff',
-                        '#0000ff' ], 
+            "Colors", [ '#EFAC41',
+                        '#DE8531',
+                        '#B32900',
+                        '#6C1305',
+                        '#330A04' ], 
             htmlListInput, listUpdate, listValueSubmit )
     };
 
