@@ -70,14 +70,25 @@
                                           r_data.gridSize [ 1 ] );
 
             p5js_sketch.renderMandelbrot ();
-        }
+        };
 
         p.draw = function ()
         {
             let r_data = get_render_data ();
 
             p.image ( imageBuffer, 0, 0 );
-        }
+        };
+
+        p.mouseClicked = function ()
+        {
+            if ( p.mouseX < 0       || p.mouseY < 0
+              || p.mouseX > p.width || p.mouseY > p.height )
+            {
+                return;
+            }
+
+            console.log ( p.mouseX, p.mouseY );
+        };
 
         
     };
