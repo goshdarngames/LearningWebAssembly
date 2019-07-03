@@ -89,7 +89,9 @@
 
             console.log ( p.mouseX, p.mouseY );
         };
+    };
 
-        
+    p5js_sketch.canvasCoordToComplex = function () 
+    {
     };
 } ( window.p5js_sketch = window.p5js_sketch || {} ))
