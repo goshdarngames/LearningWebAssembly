@@ -206,8 +206,8 @@
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         gridSize : new SketchParam ( 
-            "GridSize", [ 1080, 1080 ], 
-            htmlListInput, listUpdate, listValueSubmit ),
+            "GridSize", 1080, 
+            htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         //https://www.colourlovers.com/palette/726411/fire_within
 

@@ -24,9 +24,9 @@
         {
             let r_data = get_render_data ();
 
-            for ( i = 0; i < r_data.gridSize[0]; i++ )
+            for ( i = 0; i < r_data.gridSize; i++ )
             {
-                for ( j = 0; j < r_data.gridSize[1]; j++ )
+                for ( j = 0; j < r_data.gridSize; j++ )
                 {
                     let n = window.mandelbrot ( 
                         r_data.numIter, 
@@ -34,7 +34,7 @@
                         r_data.target [ 1 ],
                         r_data.range,
                         r_data.escape,
-                        r_data.gridSize[0],
+                        r_data.gridSize,
                         i, j                  );
 
                     if ( n == 0 )
@@ -61,13 +61,13 @@
         {
             let r_data = get_render_data ();
 
-            let canvas = p.createCanvas ( r_data.gridSize [ 0 ],
-                                          r_data.gridSize [ 1 ] );
+            let canvas = p.createCanvas ( r_data.gridSize,
+                                          r_data.gridSize );
 
             canvas.parent ( 'canvasDiv' );
 
-            imageBuffer = p.createImage ( r_data.gridSize [ 0 ],
-                                          r_data.gridSize [ 1 ] );
+            imageBuffer = p.createImage ( r_data.gridSize, 
+                                          r_data.gridSize );
 
             p5js_sketch.renderMandelbrot ();
         };
