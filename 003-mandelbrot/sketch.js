@@ -87,11 +87,28 @@
                 return;
             }
 
-            console.log ( p.mouseX, p.mouseY );
+            let r_data = get_render_data ();
+
+            new_target = [
+                p5js_sketch.canvasCoordToComplex ( 
+                    p.mouseX, r_data.target [ 0 ],
+                    r_data.range, r_data.gridSize ),
+
+                p5js_sketch.canvasCoordToComplex ( 
+                    p.mouseY, r_data.target [ 1 ], 
+                    r_data.range, r_data.gridSize )
+            ];
+
+            p5js_sketch.params.target.value = new_target;
+
+            p5js_sketch.updateParamForm ();
         };
     };
 
-    p5js_sketch.canvasCoordToComplex = function () 
+    p5js_sketch.canvasCoordToComplex = function (
+        canvasCoord, currentTarget, range, gridSize    ) 
     {
+        return currentTarget - ( range/2 ) + 
+               range * ( canvasCoord / gridSize );
     };
 } ( window.p5js_sketch = window.p5js_sketch || {} ))

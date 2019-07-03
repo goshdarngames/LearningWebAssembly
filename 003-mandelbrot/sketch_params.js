@@ -190,8 +190,8 @@
     p5js_sketch.params =
     {
         numIter  : new SketchParam ( 
-            "Iterations", 300, htmlNumberInput, 
-            singleValueUpdate, singleValueSubmit ),
+            "Iterations", 300, 
+            htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         target   : new SketchParam (
             "Target", [ -0.7436, 0.1102 ],
