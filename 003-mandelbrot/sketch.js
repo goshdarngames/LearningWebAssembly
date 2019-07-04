@@ -4,6 +4,12 @@
     {
         let imageBuffer = undefined;
 
+        let drawing       = true;
+        let drawPos       = undefined;
+
+        let maxDelta = 16;
+
+
         let get_render_data =  function ()
         {
             //load render data into this struct
@@ -19,27 +25,47 @@
             
             return r_data;
         }
-
-        p5js_sketch.renderMandelbrot = function ()
+        
+        let get_mandelbrot = function ( x, y )
         {
             let r_data = get_render_data ();
 
-            for ( i = 0; i < r_data.gridSize; i++ )
+            return  window.mandelbrot ( 
+                r_data.numIter, 
+                r_data.target [ 0 ],
+                r_data.target [ 1 ],
+                r_data.range,
+                r_data.escape,
+                r_data.gridSize,
+                x, y                  );
+
+        };
+
+        p.draw = function ()
+        {
+            let r_data = get_render_data ();
+
+            if ( drawing )
             {
-                for ( j = 0; j < r_data.gridSize; j++ )
+                let drawStartTime = window.performance.now ();
+                
+                if ( drawPos == undefined )
                 {
-                    let n = window.mandelbrot ( 
-                        r_data.numIter, 
-                        r_data.target [ 0 ],
-                        r_data.target [ 1 ],
-                        r_data.range,
-                        r_data.escape,
-                        r_data.gridSize,
-                        i, j                  );
+                    drawPos = 0;
+                }
+                
+                let delta = () => window.performance.now () - drawStartTime;
+
+                while ( delta () < maxDelta )
+                {
+                    let x = drawPos % r_data.gridSize;
+                    let y = Math.floor ( drawPos / r_data.gridSize );
+
+                    let n = get_mandelbrot ( x, y );
 
                     if ( n == 0 )
                     {
-                        imageBuffer.set ( i, j, p.color ( 0 ) );
+                        imageBuffer.set ( x, y, p.color ( 0 ) );
                     }
                     else
                     {
@@ -48,13 +74,29 @@
 
                         let setC = r_data.colors [ setIdx ];
 
-                        imageBuffer.set ( i, j, p.color ( setC ) );
+                        imageBuffer.set ( x, y, p.color ( setC ) );
                     }
+                    
+                    drawPos += 1;
 
+                    if ( drawPos > Math.pow ( r_data.gridSize, 2 ) )
+                    {
+                        drawing       = false;
+                        drawStartTime = undefined;
+                        drawPos       = undefined;
+                    }
                 }
+
+                imageBuffer.updatePixels ();
             }
 
-            imageBuffer.updatePixels ();
+            p.image ( imageBuffer, 0, 0 );
+        };
+
+        p5js_sketch.renderMandelbrot = function ()
+        {
+            drawing = true;
+            drawPos       = undefined;
         };
 
         p.setup = function ()
@@ -70,13 +112,6 @@
                                           r_data.gridSize );
 
             p5js_sketch.renderMandelbrot ();
-        };
-
-        p.draw = function ()
-        {
-            let r_data = get_render_data ();
-
-            p.image ( imageBuffer, 0, 0 );
         };
 
         p.mouseClicked = function ()

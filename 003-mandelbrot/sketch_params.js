@@ -56,25 +56,25 @@
         //Note: onsubmit=return false prevents the page being reloaded
         html = "<form onsubmit='return false' >";
 
-        html += "<input type='submit' value='x10' "+
+        html += "<input type='button' value='x10' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 10 )' />";
 
-        html += "<input type='submit' value='x5' "+
+        html += "<input type='button' value='x5' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 5 )' />";
 
-        html += "<input type='submit' value='x2' "+
+        html += "<input type='button' value='x2' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 2 )' />";
 
         html += "<input type='submit' value='Render' "+
                 "onclick='p5js_sketch.renderButtonCallback ()' />";
 
-        html += "<input type='submit' value='x2' "+
+        html += "<input type='button' value='x2' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 0.5 )' />";
 
-        html += "<input type='submit' value='x5' "+
+        html += "<input type='button' value='x5' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 0.2 )' />";
 
-        html += "<input type='submit' value='x10' "+
+        html += "<input type='button' value='x10' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 0.1 )' />";
 
         Object.keys ( p5js_sketch.params ).forEach (
