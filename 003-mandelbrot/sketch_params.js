@@ -56,6 +56,27 @@
         //Note: onsubmit=return false prevents the page being reloaded
         html = "<form onsubmit='return false' >";
 
+        html += "<input type='submit' value='x10' "+
+                "onclick='p5js_sketch.zoomButtonCallback ( 10 )' />";
+
+        html += "<input type='submit' value='x5' "+
+                "onclick='p5js_sketch.zoomButtonCallback ( 5 )' />";
+
+        html += "<input type='submit' value='x2' "+
+                "onclick='p5js_sketch.zoomButtonCallback ( 2 )' />";
+
+        html += "<input type='submit' value='Render' "+
+                "onclick='p5js_sketch.renderButtonCallback ()' />";
+
+        html += "<input type='submit' value='x2' "+
+                "onclick='p5js_sketch.zoomButtonCallback ( 0.5 )' />";
+
+        html += "<input type='submit' value='x5' "+
+                "onclick='p5js_sketch.zoomButtonCallback ( 0.2 )' />";
+
+        html += "<input type='submit' value='x10' "+
+                "onclick='p5js_sketch.zoomButtonCallback ( 0.1 )' />";
+
         Object.keys ( p5js_sketch.params ).forEach (
             ( key ) => 
             {
@@ -68,9 +89,6 @@
                 html += "</p>";
             }
         );
-
-        html += "<input type='submit' value='Render' "+
-                "onclick='p5js_sketch.renderButtonCallback ()' />";
 
         html += "</form>";
         
@@ -176,8 +194,23 @@
         );
     };
 
+    /************************************************************************
+     * Button Callbacks
+     ***********************************************************************/
+
     p5js_sketch.renderButtonCallback = function ()
     {
+        p5js_sketch.submitParamForm ();
+
+        p5js_sketch.renderMandelbrot ();
+    };
+
+    p5js_sketch.zoomButtonCallback = function ( factor )
+    {
+        p5js_sketch.params.range.value *= factor;
+
+        p5js_sketch.params.range.update ( "range" );
+
         p5js_sketch.submitParamForm ();
 
         p5js_sketch.renderMandelbrot ();
