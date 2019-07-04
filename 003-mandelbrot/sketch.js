@@ -101,7 +101,8 @@
 
             p5js_sketch.params.target.value = new_target;
 
-            p5js_sketch.updateParamForm ();
+            //update the form value to refelct the new target
+            p5js_sketch.params.target.update ( "target" );
         };
     };
 
