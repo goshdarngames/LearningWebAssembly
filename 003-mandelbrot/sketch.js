@@ -1,28 +1,35 @@
 ( function ( p5js_sketch, undefined )
 {
+    
+    //Javascript % is the remainder function so it is no use for 
+    //circular lists
+    const mod = (x, n) => (x % n + n) % n;
 
-    let get_render_data =  function ()
-    {
-        //load render data into this struct
-        let r_data = {};
-        
-        //copy across the 'value' fields from each SketchParam
-        Object.keys ( p5js_sketch.params ).forEach (
-            ( key ) => 
-            {
-                r_data [ key ] = p5js_sketch.params [ key ].value;
-            }
-        );
-        
-        return r_data;
-    }
-
-
+    //Used when converting mouse clicks to the 'target' 
     p5js_sketch.canvasCoordToComplex = function (
         canvasCoord, currentTarget, range, gridSize    ) 
     {
         return currentTarget - ( range/2 ) + 
                range * ( canvasCoord / gridSize );
+    };
+
+    //The difference between each colour is computed at the start of each
+    //render and used to create the smooth shading
+    p5js_sketch.computeColorDiffs = function ( colors, p )
+    {
+        return colors.map ( ( c, idx, arr ) =>
+        {
+            let next = arr [ ( idx + 1 ) % arr.length ];
+
+            let diffs = 
+            {
+                r : p.red ( next ) - p.red ( c ),
+                g : p.green ( next ) - p.green ( c ),
+                b : p.blue ( next ) - p.blue ( c )
+            }
+
+            return diffs;
+        });
     };
 
     p5js_sketch.computeColor = function ( band, adj )
@@ -32,6 +39,8 @@
 
     p5js_sketch.grid_p5 = ( p ) =>
     {
+        //These variables hold data that is relevent during the render
+        //process
         let imageBuffer = undefined;
 
         let drawing       = true;
@@ -39,6 +48,25 @@
 
         let maxDelta = 16;
 
+        let colorDiffs = undefined;
+
+        //This function is used during the render process to load the
+        //parameter values that the user can change
+        let get_render_data =  function ()
+        {
+            //load render data into this struct
+            let r_data = {};
+            
+            //copy across the 'value' fields from each SketchParam
+            Object.keys ( p5js_sketch.params ).forEach (
+                ( key ) => 
+                {
+                    r_data [ key ] = p5js_sketch.params [ key ].value;
+                }
+            );
+            
+            return r_data;
+        }
         
         let get_mandelbrot = function ( x, y )
         {
@@ -63,9 +91,13 @@
             {
                 let drawStartTime = window.performance.now ();
                 
+                //This is the first draw iteration so we need to
+                //initialize the private render variables
                 if ( drawPos == undefined )
                 {
                     drawPos = 0;
+                    colorDiffs =
+                        p5js_sketch.computeColorDiffs ( r_data.colors, p );
                 }
                 
                 let delta = () => window.performance.now () - drawStartTime;

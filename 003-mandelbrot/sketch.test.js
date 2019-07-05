@@ -41,6 +41,22 @@ describe ( "sketch.canvasCoordToComplex", () =>
 
 });
 
+describe ( "p5js_sketch.computeColorDiffs", () =>
+{
+    test ( "is defined", () =>
+    {
+        expect ( window.p5js_sketch.computeColorDiffs )
+            .toBeDefined ();
+    });
+
+    test ( "returns a list with computer color differences", () =>
+    {
+        //Decided not to implemented this test as it would involve mocking
+        //calls to p5js ...
+    });
+
+});
+
 describe ( "p5js_sketch.computeColor", () =>
 {
     test ( "is defined", () =>
@@ -50,3 +66,4 @@ describe ( "p5js_sketch.computeColor", () =>
     });
 
 });
+
