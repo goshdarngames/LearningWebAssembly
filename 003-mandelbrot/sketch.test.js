@@ -40,3 +40,13 @@ describe ( "sketch.canvasCoordToComplex", () =>
     });
 
 });
+
+describe ( "p5js_sketch.computeColor", () =>
+{
+    test ( "is defined", () =>
+    {
+        expect ( window.p5js_sketch.computeColor )
+            .toBeDefined ();
+    });
+
+});

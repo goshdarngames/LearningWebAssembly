@@ -40,7 +40,8 @@ long double mag ( struct Complex z )
  ***************************************************************************/
 
 EMSCRIPTEN_KEEPALIVE
-int mandelbrot ( int numIter, long double targetX, long double targetY, 
+long double mandelbrot ( 
+                 int numIter, long double targetX, long double targetY, 
                  long double range, long double escape,
                  int gridSize, int x, int y )
 {
@@ -61,13 +62,17 @@ int mandelbrot ( int numIter, long double targetX, long double targetY,
 
         if ( mag ( z ) > escape )
         {
-            break;
+            //compute continuous escape
+            long double cet = n +
+                log2 ( log ( escape ) ) - log2 ( log ( mag ( z ) ) );
+
+            return cet;
         }
 
         n--;            
     }
 
-    return n;
+    return 0;
 
 }
 

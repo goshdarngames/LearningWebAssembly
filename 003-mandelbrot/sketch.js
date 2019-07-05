@@ -1,5 +1,35 @@
 ( function ( p5js_sketch, undefined )
 {
+
+    let get_render_data =  function ()
+    {
+        //load render data into this struct
+        let r_data = {};
+        
+        //copy across the 'value' fields from each SketchParam
+        Object.keys ( p5js_sketch.params ).forEach (
+            ( key ) => 
+            {
+                r_data [ key ] = p5js_sketch.params [ key ].value;
+            }
+        );
+        
+        return r_data;
+    }
+
+
+    p5js_sketch.canvasCoordToComplex = function (
+        canvasCoord, currentTarget, range, gridSize    ) 
+    {
+        return currentTarget - ( range/2 ) + 
+               range * ( canvasCoord / gridSize );
+    };
+
+    p5js_sketch.computeColor = function ( band, adj )
+    {
+        return 0;
+    };
+
     p5js_sketch.grid_p5 = ( p ) =>
     {
         let imageBuffer = undefined;
@@ -9,22 +39,6 @@
 
         let maxDelta = 16;
 
-
-        let get_render_data =  function ()
-        {
-            //load render data into this struct
-            let r_data = {};
-            
-            //copy across the 'value' fields from each SketchParam
-            Object.keys ( p5js_sketch.params ).forEach (
-                ( key ) => 
-                {
-                    r_data [ key ] = p5js_sketch.params [ key ].value;
-                }
-            );
-            
-            return r_data;
-        }
         
         let get_mandelbrot = function ( x, y )
         {
@@ -69,12 +83,15 @@
                     }
                     else
                     {
-                        let setIdx = 
-                            Math.floor ( n % r_data.colors.length );
+                        let colorBand = Math.floor ( n );
+                        
+                        let colorAdj = n - colorBand; 
 
-                        let setC = r_data.colors [ setIdx ];
+                        let pixelColor =
+                             p5js_sketch.computeColor ( 
+                                   colorBand, colorAdj );
 
-                        imageBuffer.set ( x, y, p.color ( setC ) );
+                        imageBuffer.set ( x, y, pixelColor );
                     }
                     
                     drawPos += 1;
@@ -96,7 +113,7 @@
         p5js_sketch.renderMandelbrot = function ()
         {
             drawing = true;
-            drawPos       = undefined;
+            drawPos = undefined;
         };
 
         p.setup = function ()
@@ -141,10 +158,4 @@
         };
     };
 
-    p5js_sketch.canvasCoordToComplex = function (
-        canvasCoord, currentTarget, range, gridSize    ) 
-    {
-        return currentTarget - ( range/2 ) + 
-               range * ( canvasCoord / gridSize );
-    };
 } ( window.p5js_sketch = window.p5js_sketch || {} ))
