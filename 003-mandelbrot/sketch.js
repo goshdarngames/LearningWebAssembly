@@ -17,24 +17,36 @@
     //render and used to create the smooth shading
     p5js_sketch.computeColorDiffs = function ( colors, p )
     {
-        return colors.map ( ( c, idx, arr ) =>
+        return colors.map ( ( curr, idx, arr ) =>
         {
             let next = arr [ ( idx + 1 ) % arr.length ];
 
+            c0 = p.color ( curr );
+            c1 = p.color ( next );
+
             let diffs = 
             {
-                r : p.red ( next ) - p.red ( c ),
-                g : p.green ( next ) - p.green ( c ),
-                b : p.blue ( next ) - p.blue ( c )
+                r : p.red ( c1 ) - p.red ( c0 ),
+                g : p.green ( c1 ) - p.green ( c0 ),
+                b : p.blue ( c1 ) - p.blue ( c0 )
             }
 
             return diffs;
         });
     };
 
-    p5js_sketch.computeColor = function ( band, adj )
+    p5js_sketch.computeColor = function ( 
+        band, adj, colors, colorDiffs, p )
     {
-        return 0;
+        let r = p.red   ( p.color ( colors [ band ] ) );
+        let g = p.green ( p.color ( colors [ band ] ) );
+        let b = p.blue  ( p.color ( colors [ band ] ) );
+
+        r += adj * colorDiffs [ band ].r;
+        g += adj * colorDiffs [ band ].g;
+        b += adj * colorDiffs [ band ].b;
+
+        return p.color ( r, g, b );
     };
 
     p5js_sketch.grid_p5 = ( p ) =>
@@ -115,13 +127,16 @@
                     }
                     else
                     {
-                        let colorBand = Math.floor ( n );
+                        let colorBand = 
+                            Math.floor ( n ) % r_data.colors.length;
                         
-                        let colorAdj = n - colorBand; 
+                        let colorAdj = 1 - ( n - Math.floor ( n )); 
 
                         let pixelColor =
                              p5js_sketch.computeColor ( 
-                                   colorBand, colorAdj );
+                                   colorBand, colorAdj,
+                                   r_data.colors, colorDiffs, p
+                            );
 
                         imageBuffer.set ( x, y, pixelColor );
                     }
