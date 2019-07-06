@@ -239,17 +239,17 @@
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         gridSize : new SketchParam ( 
-            "GridSize", 1080, 
+            "GridSize", 1350, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         //https://www.colourlovers.com/palette/726411/fire_within
 
         colors   : new SketchParam ( 
-            "Colors", [ '#AAFF00',
-                        '#FFAA00',
-                        '#FF00AA',
-                        '#AA00FF',
-                        '#00AAFF' ], 
+            "Colors", [ '#FFF001',
+                        '#FD1999',
+                        '#99FC20',
+                        '#00E6FE',
+                        '#A10EEC' ], 
             htmlListInput, listUpdate, listValueSubmit )
     };
 
