@@ -235,7 +235,7 @@
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         escape   : new SketchParam ( 
-            "Escape", 500000, 
+            "Escape", 5000000, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         gridSize : new SketchParam ( 
@@ -245,11 +245,17 @@
         //https://www.colourlovers.com/palette/726411/fire_within
 
         colors   : new SketchParam ( 
-            "Colors", [ '#FFF001',
-                        '#FD1999',
-                        '#99FC20',
-                        '#00E6FE',
-                        '#A10EEC' ], 
+            "Colors", [ 
+                        '#FFFFFF',
+                        '#AAFF00',
+                        '#FFFFFF',
+                        '#FFAA00',
+                        '#FFFFFF',
+                        '#FF00AA',
+                        '#FFFFFF',
+                        '#AA00FF',
+                        '#FFFFFF',
+                        '#00AAFF' ], 
             htmlListInput, listUpdate, listValueSubmit )
     };
 

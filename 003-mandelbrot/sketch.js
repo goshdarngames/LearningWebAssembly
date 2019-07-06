@@ -26,18 +26,34 @@
 
             let diffs = 
             {
-                r : p.red ( c1 ) - p.red ( c0 ),
+                r : p.red   ( c1 ) - p.red   ( c0 ),
                 g : p.green ( c1 ) - p.green ( c0 ),
-                b : p.blue ( c1 ) - p.blue ( c0 )
+                b : p.blue  ( c1 ) - p.blue  ( c0 )
             }
 
             return diffs;
         });
     };
 
-    p5js_sketch.computeColor = function ( 
-        band, adj, colors, colorDiffs, p )
+    //Takes a value from 0..1 and returns an index from the color table
+    let normColor = function ( n, numColors )
     {
+        return Math.floor ( n*numColors );
+    };
+
+    p5js_sketch.computeColor = function ( 
+        n, escape, colors, colorDiffs, p )
+    {
+        let norm = n/escape;
+
+        let cycles = 10000;
+
+        let normColor = 
+             ( norm * colors.length * cycles ) % colors.length;
+
+        let band = Math.floor ( normColor );
+        let adj = 1-( normColor % 1 );
+
         let r = p.red   ( p.color ( colors [ band ] ) );
         let g = p.green ( p.color ( colors [ band ] ) );
         let b = p.blue  ( p.color ( colors [ band ] ) );
@@ -127,14 +143,9 @@
                     }
                     else
                     {
-                        let colorBand = 
-                            Math.floor ( n ) % r_data.colors.length;
-                        
-                        let colorAdj = 1 - ( n - Math.floor ( n )); 
-
                         let pixelColor =
                              p5js_sketch.computeColor ( 
-                                   colorBand, colorAdj,
+                                   n, r_data.escape,
                                    r_data.colors, colorDiffs, p
                             );
 
