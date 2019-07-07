@@ -250,16 +250,16 @@
 
         colors   : new SketchParam ( 
             "Colors", [ 
-                        '#FFFFFF',
-                        '#AAFF00',
-                        '#FFFFFF',
-                        '#FFAA00',
-                        '#FFFFFF',
-                        '#FF00AA',
-                        '#FFFFFF',
-                        '#AA00FF',
-                        '#FFFFFF',
-                        '#00AAFF' ], 
+                        '#A5A5A5',
+                        '#750D0D',
+                        '#A5A5A5',
+                        '#974E01',
+                        '#A5A5A5',
+                        '#0A5F15',
+                        '#A5A5A5',
+                        '#0A2B5F',
+                        '#A5A5A5',
+                        '#5F0A53' ], 
             htmlListInput, listUpdate, listValueSubmit )
     };
 

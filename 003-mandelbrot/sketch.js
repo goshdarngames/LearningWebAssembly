@@ -72,7 +72,7 @@
         let drawing       = true;
         let drawPos       = undefined;
 
-        let maxDelta = 16;
+        let maxDelta = 30;
 
         let colorDiffs = undefined;
 
