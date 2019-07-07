@@ -66,7 +66,8 @@ long double mandelbrot (
             long double cet = n +
                 log2 ( log ( escape ) ) - log2 ( log ( mag ( z ) ) );
 
-            return cet;
+            //return normalized escape
+            return ( cet / escape );
         }
 
         n--;            

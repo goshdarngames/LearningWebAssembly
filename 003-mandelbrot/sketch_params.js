@@ -230,12 +230,16 @@
             "Target", [ -0.7436, 0.1102 ],
             htmlListInput, listUpdate, listValueSubmit ),
 
+        cycles    : new SketchParam ( 
+            "Color Cycles", 1000000, 
+            htmlNumberInput, singleValueUpdate, singleValueSubmit ),
+
         range    : new SketchParam ( 
             "Range", 3.5, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         escape   : new SketchParam ( 
-            "Escape", 5000000, 
+            "Escape", 500000000, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         gridSize : new SketchParam ( 
