@@ -124,6 +124,12 @@
                     drawPos = 0;
                     colorDiffs =
                         p5js_sketch.computeColorDiffs ( r_data.colors, p );
+
+                    p.resizeCanvas ( r_data.gridSize, r_data.gridSize );
+
+                    imageBuffer = p.createImage ( r_data.gridSize, 
+                                                  r_data.gridSize );
+
                 }
                 
                 let delta = () => window.performance.now () - drawStartTime;
@@ -180,9 +186,6 @@
                                           r_data.gridSize );
 
             canvas.parent ( 'canvasDiv' );
-
-            imageBuffer = p.createImage ( r_data.gridSize, 
-                                          r_data.gridSize );
 
             p5js_sketch.renderMandelbrot ();
         };

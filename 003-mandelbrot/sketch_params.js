@@ -223,7 +223,7 @@
     p5js_sketch.params =
     {
         numIter  : new SketchParam ( 
-            "Iterations", 3000, 
+            "Iterations", 300, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         target   : new SketchParam (
@@ -243,7 +243,7 @@
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         gridSize : new SketchParam ( 
-            "GridSize", 1350, 
+            "GridSize", 800, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         //https://www.colourlovers.com/palette/726411/fire_within
