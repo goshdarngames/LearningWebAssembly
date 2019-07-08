@@ -223,19 +223,19 @@
     p5js_sketch.params =
     {
         numIter  : new SketchParam ( 
-            "Iterations", 300, 
+            "Iterations", 3000, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         target   : new SketchParam (
-            "Target", [ -0.7436, 0.1102 ],
+            "Target", [ -1.7116377717499995, -0.00045016506250009433 ],
             htmlListInput, listUpdate, listValueSubmit ),
 
         cycles    : new SketchParam ( 
-            "Color Cycles", 1000000, 
+            "Color Cycles", 5000000, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         range    : new SketchParam ( 
-            "Range", 3.5, 
+            "Range", 3.5e-8, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         escape   : new SketchParam ( 
@@ -250,7 +250,6 @@
 
         colors   : new SketchParam ( 
             "Colors", [ 
-                        '#A5A5A5',
                         '#750D0D',
                         '#A5A5A5',
                         '#974E01',
@@ -259,7 +258,9 @@
                         '#A5A5A5',
                         '#0A2B5F',
                         '#A5A5A5',
-                        '#5F0A53' ], 
+                        '#5F0A53',
+                        '#A5A5A5',
+                      ], 
             htmlListInput, listUpdate, listValueSubmit )
     };
 
