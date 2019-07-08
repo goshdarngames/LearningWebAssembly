@@ -56,37 +56,41 @@
         //Note: onsubmit=return false prevents the page being reloaded
         html = "<form onsubmit='return false' >";
 
-        html += "<input type='button' value='x10' "+
+        html += "<div id='renderButtonRow' >";
+
+        html += "<input type='button' class='zoomButton' value='x10' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 10 )' />";
 
-        html += "<input type='button' value='x5' "+
+        html += "<input type='button' class='zoomButton' value='x5' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 5 )' />";
 
-        html += "<input type='button' value='x2' "+
+        html += "<input type='button' class='zoomButton' value='x2' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 2 )' />";
 
-        html += "<input type='submit' value='Render' "+
+        html += "<input type='submit' id='renderButton' value='Render' "+
                 "onclick='p5js_sketch.renderButtonCallback ()' />";
 
-        html += "<input type='button' value='x2' "+
+        html += "<input type='button' class='zoomButton' value='x2' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 0.5 )' />";
 
-        html += "<input type='button' value='x5' "+
+        html += "<input type='button' class='zoomButton' value='x5' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 0.2 )' />";
 
-        html += "<input type='button' value='x10' "+
+        html += "<input type='button' class='zoomButton' value='x10' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 0.1 )' />";
+
+        html += "</div>";
 
         Object.keys ( p5js_sketch.params ).forEach (
             ( key ) => 
             {
                 paramData = p5js_sketch.params [ key ];
 
-                html += "<p>";
+                html += "<div>";
 
                 html += paramData.html ( key, paramData );
 
-                html += "</p>";
+                html += "</div>";
             }
         );
 
@@ -235,7 +239,7 @@
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         range    : new SketchParam ( 
-            "Range", 3.5e-8, 
+            "Range", 7, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         escape   : new SketchParam ( 

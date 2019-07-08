@@ -21,9 +21,36 @@ canvas
 {
     background : #F066F0;
     position : relative;
+
+    margin-top : 15px;
+
+    max-width : 600px;
 }
 
-form  { display: table;      }
-p     { display: table-row;  }
-label { display: table-cell; }
-input { display: table-cell; }
+
+#renderButtonRow
+{
+    background : #FFFFFF;
+    padding    : 10px;
+
+    display : flex;
+
+    justify-content : center;
+}
+
+
+input.zoomButton
+{
+    background : #FFFFFF;
+
+    padding : 5px;
+    margin  : 10px auto;
+
+    border : 2px solid #ccc;
+    border-radius : 5px;
+}
+
+#renderButton
+{
+    background : #CCCCCC;
+}
