@@ -58,41 +58,45 @@
 
         html += "<div id='renderButtonRow' >";
 
-        html += "<input type='button' class='zoomButton' value='x10' "+
+        html += "<input type='button' class='zoomButton' value='-10x' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 10 )' />";
 
-        html += "<input type='button' class='zoomButton' value='x5' "+
+        html += "<input type='button' class='zoomButton' value='-5x' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 5 )' />";
 
-        html += "<input type='button' class='zoomButton' value='x2' "+
+        html += "<input type='button' class='zoomButton' value='-2x' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 2 )' />";
 
         html += "<input type='submit' id='renderButton' value='Render' "+
                 "onclick='p5js_sketch.renderButtonCallback ()' />";
 
-        html += "<input type='button' class='zoomButton' value='x2' "+
+        html += "<input type='button' class='zoomButton' value='+2x' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 0.5 )' />";
 
-        html += "<input type='button' class='zoomButton' value='x5' "+
+        html += "<input type='button' class='zoomButton' value='+5x' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 0.2 )' />";
 
-        html += "<input type='button' class='zoomButton' value='x10' "+
+        html += "<input type='button' class='zoomButton' value='+10x' "+
                 "onclick='p5js_sketch.zoomButtonCallback ( 0.1 )' />";
 
         html += "</div>";
+
+        html += "<div id='paramDiv' >";
 
         Object.keys ( p5js_sketch.params ).forEach (
             ( key ) => 
             {
                 paramData = p5js_sketch.params [ key ];
 
-                html += "<div>";
+                html += "<div class='paramRow'>";
 
                 html += paramData.html ( key, paramData );
 
                 html += "</div>";
             }
         );
+
+        html += "</div>";
 
         html += "</form>";
         
@@ -226,28 +230,28 @@
 
     p5js_sketch.params =
     {
+        gridSize : new SketchParam ( 
+            "Canvas Size", 800, 
+            htmlNumberInput, singleValueUpdate, singleValueSubmit ),
+
+        range    : new SketchParam ( 
+            "Range", 5, 
+            htmlNumberInput, singleValueUpdate, singleValueSubmit ),
+
         numIter  : new SketchParam ( 
             "Iterations", 3000, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         target   : new SketchParam (
-            "Target", [ -1.7116377717499995, -0.00045016506250009433 ],
+            "Target", [ -0.14348441833165027, -1.0189366179221557 ],
             htmlListInput, listUpdate, listValueSubmit ),
 
         cycles    : new SketchParam ( 
-            "Color Cycles", 5000000, 
-            htmlNumberInput, singleValueUpdate, singleValueSubmit ),
-
-        range    : new SketchParam ( 
-            "Range", 7, 
+            "Color Cycles", 500000, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         escape   : new SketchParam ( 
             "Escape", 500000000, 
-            htmlNumberInput, singleValueUpdate, singleValueSubmit ),
-
-        gridSize : new SketchParam ( 
-            "GridSize", 800, 
             htmlNumberInput, singleValueUpdate, singleValueSubmit ),
 
         //https://www.colourlovers.com/palette/726411/fire_within

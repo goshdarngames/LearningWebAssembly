@@ -1,6 +1,9 @@
+/*
+ * Color Palette : https://www.colourlovers.com/palette/726411/fire_within
+ */
 body
 {
-    background : #112211;
+    background : #330A04;
 
     margin : 0;
 
@@ -15,11 +18,15 @@ body
 canvas
 {
     position : top;
+
+    border : 3px solid #B32900;
 }
 
 #renderOptions 
 {
-    background : #F066F0;
+    background : #6C1305;
+    color : #EFAC41;
+
     position : relative;
 
     margin-top : 15px;
@@ -30,7 +37,7 @@ canvas
 
 #renderButtonRow
 {
-    background : #FFFFFF;
+    background : #B32900;
     padding    : 10px;
 
     display : flex;
@@ -41,16 +48,78 @@ canvas
 
 input.zoomButton
 {
-    background : #FFFFFF;
+    background : #330A04;
+    color : #EFAC4A;
 
-    padding : 5px;
+    padding : 2px;
     margin  : 10px auto;
 
-    border : 2px solid #ccc;
-    border-radius : 5px;
+    display : block;
+
+    border : 2px solid #EFAC4A;
+    border-radius : 50%;
+
+    height : 48px;
+    width : 48px;
+
+    font-size : 16px;
+
 }
 
 #renderButton
 {
-    background : #CCCCCC;
+    background : #330A04;
+    color : #EFAC4A;
+
+    border : 2px solid #EFAC4A;
+    font-size : 16px;
+
+    display : block;
+
+    height : 30px;
+
+    top : 50%;
+    transform : translateY(50%);
+}
+
+#paramDiv
+{
+  padding : 10px;
+}
+
+.paramRow
+{
+    width : 100%;
+    
+    display : inline-grid;
+
+    grid-template-columns : 30% auto;
+
+    grid-gap : 2px;
+
+    padding-top : 4px;
+    padding-bottom : 8px;
+}
+
+.paramRow label 
+{
+    grid-column-start : 1;
+    grid-column-end : 1;
+
+    padding-right : 10px;
+
+    display : block;
+    text-align : right;
+    
+    font-family : "Arial", sans-serif;
+}
+
+.paramRow input
+{
+    grid-column-start : 2;
+    grid-column-end : 2;
+    
+    background : #330A04;
+    color : #EFAC41;
+    border : 1px solid #B32900;
 }
