@@ -1,22 +1,61 @@
 ( function ( pixi_grid, undefined )
 {
-    pixi_grid.init = function ( pixi, app )
+    let grid_rows = 10;
+    let grid_cols = 10;
+
+    let cell_size = 80;
+
+    pixi_grid.init_webasm = function ( module )
     {
-        let grid_graphics = new pixi.Graphics ();
+        let grid_init = module.cwrap ( 'grid_init' );
 
-        app.stage.addChild ( grid_graphics );
+        grid_init ();
 
-        app.ticker.add ( () => grid_draw ( grid_graphics ) );
+        let get_grid_data_ptr = module.cwrap ( 'get_grid_data', 'array' );
+
+        pixi_grid.get_grid_buffer = () =>
+        {
+            let grid_data_ptr = get_grid_data_ptr ();
+
+            let array_size = 800*800*3;
+
+            let js_array = 
+                module.HEAPU8.subarray ( grid_data_ptr, 
+                                         grid_data_ptr + array_size );
+
+            return js_array;
+        };
+
     };
 
-    let grid_draw = function ( graphics )
+    pixi_grid.init_pixi = function ( pixi, document )
     {
-        graphics.clear ();
+        let type="WebGL";
+        
+        if ( !PIXI.utils.isWebGLSupported () )
+        {
+            type = "canvas";
+        }
 
-        graphics.beginFill ( 0xFF3300 );
-        graphics.lineStyle ( 10, 0xffd900, 1 );
+        PIXI.utils.sayHello ( type );
 
-        graphics.drawRect ( 50, 200, 100, 100 );
+        let app = new PIXI.Application (
+            {
+                width  : 800,
+                height : 800
+            });
+
+        document.body.appendChild ( app.view );
+
+        let grid_buffer = pixi_grid.get_grid_buffer ();
+
+        let grid_texture = pixi.Texture.fromBuffer ( 
+            grid_buffer, 800, 800, { format : pixi.FORMATS.RGB } );
+
+        let grid_sprite = new pixi.Sprite ( grid_texture );
+
+
+        app.stage.addChild ( grid_sprite );
     };
 
 } ( window.pixi_grid = window.pixi_grid || {} ))

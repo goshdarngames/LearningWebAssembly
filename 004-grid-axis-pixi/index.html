@@ -15,24 +15,12 @@
 
         <script type="text/javascript">
 
-            let type="WebGL";
-            
-            if ( !PIXI.utils.isWebGLSupported () )
+            Module.onRuntimeInitialized = _ =>
             {
-                type = "canvas";
-            }
+                window.pixi_grid.init_webasm ( Module );
 
-            PIXI.utils.sayHello ( type );
-
-            let app = new PIXI.Application (
-                {
-                    width  : 800,
-                    height : 800
-                });
-
-            document.body.appendChild ( app.view );
-
-            window.pixi_grid.init ( PIXI, app );
+                window.pixi_grid.init_pixi ( PIXI, document );
+            };
 
         </script>
 
