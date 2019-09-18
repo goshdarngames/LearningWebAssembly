@@ -55,6 +55,8 @@ void sim_update ()
 
 void sim_write_cell_rgb ( int idx, uint8_t cell_value )
 {
+    //determine appropriate rgb values for cell_value
+    
     uint8_t r = 0;
     uint8_t g = 0;
     uint8_t b = 0;
@@ -65,6 +67,8 @@ void sim_write_cell_rgb ( int idx, uint8_t cell_value )
         case 1 : g = 255; break;
         case 2 : b = 255; break;
     }
+
+    //translate sim index to rgb buffer index
 
     rgb_buffer [ idx * 3     ] = r;
     rgb_buffer [ idx * 3 + 1 ] = g;
