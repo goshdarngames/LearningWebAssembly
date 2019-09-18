@@ -4,10 +4,16 @@
 
 const int SIZE = 800*800*3;
 
-uint8_t grid_data [ SIZE ];
+uint8_t rgb_buffer [ SIZE ];
 
 EMSCRIPTEN_KEEPALIVE
-void grid_noise ()
+uint8_t * get_rgb_buffer_ptr ()
+{
+    return rgb_buffer;
+}
+
+EMSCRIPTEN_KEEPALIVE
+void sim_update ()
 {
     for ( int i = 0; i < 800; i ++ )
     {
@@ -15,13 +21,13 @@ void grid_noise ()
         {
             int grid_idx = ( i % 800 ) * 3 + ( j * 800 ) * 3;
 
-            grid_data [ grid_idx     ] = rand () % 256;
-            grid_data [ grid_idx + 1 ] = rand () % 256;
-            grid_data [ grid_idx + 2 ] = rand () % 256;
+            rgb_buffer [ grid_idx     ] = rand () % 256;
+            rgb_buffer [ grid_idx + 1 ] = rand () % 256;
+            rgb_buffer [ grid_idx + 2 ] = rand () % 256;
 
             if ( i == 399 || i == 400 || j == 399 || j == 400 )
             {
-                grid_data [ grid_idx ] = 255;
+                rgb_buffer [ grid_idx ] = 255;
             }
 
         }
@@ -29,8 +35,6 @@ void grid_noise ()
 }
 
 EMSCRIPTEN_KEEPALIVE
-uint8_t * get_grid_data ()
+void sim_write_rgb_buffer ()
 {
-    return grid_data;
 }
-
