@@ -2,13 +2,11 @@
 
 #include "cellular_automata.h"
 
-const int G_SIZE = 800 * 800;
-
 /****************************************************************************
  * RGB BUFFER
  ***************************************************************************/
 
-uint8_t rgb_buffer [ G_SIZE*3 ];
+uint8_t rgb_buffer [ SIZE*3 ];
 
 EMSCRIPTEN_KEEPALIVE
 uint8_t * get_rgb_buffer_ptr ()

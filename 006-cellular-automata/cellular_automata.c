@@ -3,11 +3,6 @@
 
 #include "cellular_automata.h"
 
-const int WIDTH = 800;
-const int HEIGHT = 800;
-
-const int SIZE = WIDTH * HEIGHT;
-
 /****************************************************************************
  * SIMULATION
  ***************************************************************************/
