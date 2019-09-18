@@ -7,7 +7,7 @@
 
     pixi_noise.init_webasm = function ( module )
     {
-        pixi_noise.update_grid_noise = module.cwrap ( 'grid_noise' );
+        pixi_noise.sim_update = module.cwrap ( 'grid_noise' );
 
 
         let get_grid_data_ptr = module.cwrap ( 'get_grid_data', 'array' );
@@ -48,21 +48,20 @@
 
         let get_noise_texture = () =>
         {
-            pixi_noise.update_grid_noise ();
+            let grid_buffer = pixi_noise.get_grid_buffer ();
+
+            return pixi.Texture.fromBuffer ( 
+                grid_buffer, 800, 800, { format : pixi.FORMATS.RGB } );
 
         };
 
-            let grid_buffer = pixi_noise.get_grid_buffer ();
-
-            let text =  pixi.Texture.fromBuffer ( 
-                grid_buffer, 800, 800, { format : pixi.FORMATS.RGB } );
-
-        let grid_sprite = new pixi.Sprite ( text );
+        let grid_sprite = new pixi.Sprite ( get_noise_texture () );
 
         pixi_noise.pixi_app.stage.addChild ( grid_sprite );
 
         pixi_noise.pixi_app.ticker.add ( () =>
         {
+            pixi_noise.sim_update ();
             grid_sprite.texture = get_noise_texture ();
         });
     };
