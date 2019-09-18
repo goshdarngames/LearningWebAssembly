@@ -9,6 +9,8 @@
     {
         pixi_cellular_automata.sim_update = module.cwrap ( 'sim_update' );
 
+        pixi_cellular_automata.sim_write_rgb_buffer
+            = module.cwrap ( 'sim_write_rgb_buffer' );
 
         let get_rgb_buffer_ptr = 
             module.cwrap ( 'get_rgb_buffer_ptr', 'array' );
@@ -47,7 +49,7 @@
 
         document.body.appendChild ( pixi_cellular_automata.pixi_app.view );
 
-        let get_noise_texture = () =>
+        let get_sim_texture = () =>
         {
             let grid_buffer = pixi_cellular_automata.get_rgb_buffer_ptr  ();
 
@@ -56,14 +58,15 @@
 
         };
 
-        let grid_sprite = new pixi.Sprite ( get_noise_texture () );
+        let grid_sprite = new pixi.Sprite ( get_sim_texture () );
 
         pixi_cellular_automata.pixi_app.stage.addChild ( grid_sprite );
 
         pixi_cellular_automata.pixi_app.ticker.add ( () =>
         {
             pixi_cellular_automata.sim_update ();
-            grid_sprite.texture = get_noise_texture ();
+            pixi_cellular_automata.sim_write_rgb_buffer ();
+            grid_sprite.texture = get_sim_texture ();
         });
     };
 
