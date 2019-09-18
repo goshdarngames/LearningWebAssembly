@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        
+        <script src="pixi.js" ></script>
+
+        <script src="vue.js" ></script>
+
+        <script src="pixi_noise.js" ></script>
+
+        <script src="a.out.js" ></script>
+
+        <title>Hello</title>
+    </head>
+    <body>
+
+        <script type="text/javascript">
+
+            Module.onRuntimeInitialized = _ =>
+            {
+                window.pixi_noise.init_webasm ( Module );
+
+                window.pixi_noise.init_pixi ( PIXI, document );
+
+                window.pixi_noise.init_vue ( Vue );
+            };
+
+        </script>
+
+        <div id="app">
+            {{ fps }}
+        </p>
+    </body>
+</html>
