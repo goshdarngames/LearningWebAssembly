@@ -50,14 +50,14 @@
         {
             pixi_noise.update_grid_noise ();
 
-            let grid_buffer = pixi_noise.get_grid_buffer ();
-
-            return pixi.Texture.fromBuffer ( 
-                grid_buffer, 800, 800, { format : pixi.FORMATS.RGB } );
-
         };
 
-        let grid_sprite = new pixi.Sprite ( get_noise_texture () );
+            let grid_buffer = pixi_noise.get_grid_buffer ();
+
+            let text =  pixi.Texture.fromBuffer ( 
+                grid_buffer, 800, 800, { format : pixi.FORMATS.RGB } );
+
+        let grid_sprite = new pixi.Sprite ( text );
 
         pixi_noise.pixi_app.stage.addChild ( grid_sprite );
 
