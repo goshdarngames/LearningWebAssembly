@@ -1,23 +1,12 @@
-#include <emscripten.h>
 #include <stdint.h>
 #include <stdlib.h>
 
-/****************************************************************************
- * RGB BUFFER
- ***************************************************************************/
+#include "cellular_automata.h"
 
 const int WIDTH = 800;
 const int HEIGHT = 800;
 
 const int SIZE = WIDTH * HEIGHT;
-
-uint8_t rgb_buffer [ SIZE*3 ];
-
-EMSCRIPTEN_KEEPALIVE
-uint8_t * get_rgb_buffer_ptr ()
-{
-    return rgb_buffer;
-}
 
 /****************************************************************************
  * SIMULATION
@@ -42,8 +31,7 @@ void flip_sim_buffers ()
     curr_sim_buffer = tmp;
 }
 
-EMSCRIPTEN_KEEPALIVE
-void sim_update ()
+void ca_update ()
 {
     for ( int i = 0; i < SIZE; i++ )
     {
@@ -53,7 +41,7 @@ void sim_update ()
     flip_sim_buffers ();
 }
 
-void sim_write_cell_rgb ( int idx, uint8_t cell_value )
+void sim_write_cell_rgb ( int idx, uint8_t cell_value, uint8_t * rgb_buffer )
 {
     //determine appropriate rgb values for cell_value
     
@@ -75,11 +63,10 @@ void sim_write_cell_rgb ( int idx, uint8_t cell_value )
     rgb_buffer [ idx * 3 + 2 ] = b;
 }
 
-EMSCRIPTEN_KEEPALIVE
-void sim_write_rgb_buffer ()
+void ca_write_rgb_buffer ( uint8_t * rgb_buffer )
 {
     for ( int i = 0; i < SIZE; i++ )
     {
-        sim_write_cell_rgb ( i, curr_sim_buffer [ i ] );
+        sim_write_cell_rgb ( i, curr_sim_buffer [ i ], rgb_buffer );
     }
 }
