@@ -26,6 +26,44 @@ void flip_sim_buffers ()
     curr_sim_buffer = tmp;
 }
 
+int sim_get_neighbour_idx ( int idx, int n, int width, int height, int size )
+{
+    int n_idx = idx;
+
+    int row_adj, col_adj;
+
+    switch ( n )
+    {
+        case 0 : row_adj = -1; col_adj = -1; break;
+        case 1 : row_adj = -1; col_adj =  0; break;
+        case 2 : row_adj = -1; col_adj =  1; break;
+        case 3 : row_adj =  0; col_adj = -1; break;
+        case 4 : row_adj =  0; col_adj =  1; break;
+        case 5 : row_adj =  1; col_adj = -1; break;
+        case 6 : row_adj =  1; col_adj =  0; break;
+        case 7 : row_adj =  1; col_adj =  1; break;
+    }
+
+    n_idx += row_adj * width;
+
+    if ( n_idx < 0 || n_idx > size ) 
+    {
+        return -1;
+    }
+
+    if ( ( n_idx % width ) + col_adj < 0      || 
+         ( n_idx % width ) + col_adj >= width )
+    {
+        return -1;
+    }
+    else
+    {
+        n_idx += col_adj;
+    }
+
+    return n_idx;
+}
+
 void ca_update ()
 {
     for ( int i = 0; i < SIZE; i++ )
@@ -36,7 +74,7 @@ void ca_update ()
     flip_sim_buffers ();
 }
 
-void sim_write_cell_rgb ( int idx, uint8_t cell_value, uint8_t * rgb_buffer )
+void write_cell_rgb ( int idx, uint8_t cell_value, uint8_t * rgb_buffer )
 {
     //determine appropriate rgb values for cell_value
     
@@ -62,6 +100,6 @@ void ca_write_rgb_buffer ( uint8_t * rgb_buffer )
 {
     for ( int i = 0; i < SIZE; i++ )
     {
-        sim_write_cell_rgb ( i, curr_sim_buffer [ i ], rgb_buffer );
+        write_cell_rgb ( i, curr_sim_buffer [ i ], rgb_buffer );
     }
 }
