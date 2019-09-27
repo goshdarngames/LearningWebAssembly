@@ -49,7 +49,7 @@
 
         document.body.appendChild ( pixi_cellular_automata.pixi_app.view );
 
-        let get_sim_texture = () =>
+        pixi_cellular_automata.get_sim_texture = () =>
         {
             let grid_buffer = pixi_cellular_automata.get_rgb_buffer_ptr  ();
 
@@ -58,15 +58,15 @@
 
         };
 
-        let grid_sprite = new pixi.Sprite ( get_sim_texture () );
+        pixi_cellular_automata.grid_sprite = 
+            new pixi.Sprite ( pixi_cellular_automata.get_sim_texture () );
 
-        pixi_cellular_automata.pixi_app.stage.addChild ( grid_sprite );
+        pixi_cellular_automata.pixi_app.stage.addChild ( 
+            pixi_cellular_automata.grid_sprite );
 
         pixi_cellular_automata.pixi_app.ticker.add ( () =>
         {
-            pixi_cellular_automata.sim_update ();
-            pixi_cellular_automata.sim_write_rgb_buffer ();
-            grid_sprite.texture = get_sim_texture ();
+            pixi_cellular_automata.mainLoop ();
         });
     };
 
