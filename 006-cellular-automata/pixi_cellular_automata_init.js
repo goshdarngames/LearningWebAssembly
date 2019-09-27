@@ -70,15 +70,4 @@
         });
     };
 
-    pixi_cellular_automata.init_vue = function ( Vue )
-    {
-        let vm = new Vue ({
-            el : "#app",
-            data : 
-            {
-                fps : pixi_cellular_automata.pixi_app.ticker.FPS
-            }
-        });
-    };
-
 } ( window.pixi_cellular_automata = window.pixi_cellular_automata || {} ))

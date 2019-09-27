@@ -4,7 +4,7 @@
 #include "cellular_automata.h"
 
 /****************************************************************************
- * SIMULATION
+ * SIMULATION - DATA
  ***************************************************************************/
 
 uint8_t sim_buffer_1 [ SIZE ];
@@ -16,6 +16,26 @@ uint8_t * next_sim_buffer = sim_buffer_2;
 enum SimState { Start, Running };
 
 enum SimState sim_state = Start;
+
+int sim_spont = 5000;
+
+/****************************************************************************
+ * SIMULATION - JS DATA ACCESSOR FUNCTIONS
+ ***************************************************************************/
+
+float sim_get_spont_normalized ()
+{
+    return sim_spont/PROB_MAX;
+}
+
+void sim_set_spont_normalized ( float n )
+{
+    sim_spont = (1/PROB_MAX)*n;
+}
+
+/****************************************************************************
+ * SIMULATION - UTILITY FUNCTIONS
+ ***************************************************************************/
 
 void flip_sim_buffers ()
 {
@@ -64,6 +84,10 @@ int sim_get_neighbour_idx ( int idx, int n, int width, int height, int size )
     return n_idx;
 }
 
+/****************************************************************************
+ * SIMULATION - STATES
+ ***************************************************************************/
+
 void ca_update_start ()
 {
     for ( int i = 0; i < SIZE; i++ )
@@ -81,6 +105,8 @@ void ca_update_running ()
         int r_count = 0;
         int g_count = 0;
         int b_count = 0;
+                    
+        next_sim_buffer [ i ] = curr_sim_buffer [ i ];
 
         for ( int j = 0; j < 8; j++ )
         {
@@ -94,24 +120,40 @@ void ca_update_running ()
             }
         }
 
-        if ( r_count > g_count && r_count > b_count )
+
+        switch ( curr_sim_buffer [ i ] )
         {
-            next_sim_buffer [ i ] = 0;
+            case 0 : 
+            {
+                if ( g_count > 3 )
+                {
+                    next_sim_buffer [ i ] = 1;
+                }
+                break;
+            }
+            case 1 : 
+            {
+                if ( b_count > 3 )
+                {
+                    next_sim_buffer [ i ] = 2;
+                }
+                break;
+            }
+            case 2 : 
+            {
+                if ( r_count > 3 )
+                {
+                    next_sim_buffer [ i ] = 0;
+                }
+                break;
+            }
         }
 
-        else if ( g_count > r_count && g_count > b_count )
+        if ( rand () % PROB_MAX < sim_spont )
         {
-            next_sim_buffer [ i ] = 1;
+            next_sim_buffer [ i ] = ( curr_sim_buffer [ i ] + 1 ) % 3;
         }
 
-        else if ( b_count > r_count && b_count > g_count )
-        {
-            next_sim_buffer [ i ] = 2;
-        }
-        else
-        {
-            next_sim_buffer [ i ] = rand () % 3;
-        }
 
     }
 
@@ -128,6 +170,10 @@ void ca_update ()
 
     flip_sim_buffers ();
 }
+
+/****************************************************************************
+ * WRITE RGB BUFFER
+ ***************************************************************************/
 
 void write_cell_rgb ( int idx, uint8_t cell_value, uint8_t * rgb_buffer )
 {

@@ -7,11 +7,13 @@
 
         <script src="vue.js" ></script>
 
-        <script src="pixi_cellular_automata.js" ></script>
+        <script src="pixi_cellular_automata_init.js" ></script>
+
+        <script src="pixi_cellular_automata_form_handlers.js" ></script>
 
         <script src="a.out.js" ></script>
 
-        <title>Hello</title>
+        <title>Cellular Automata</title>
     </head>
     <body>
 
@@ -23,13 +25,14 @@
 
                 window.pixi_cellular_automata.init_pixi ( PIXI, document );
 
-                window.pixi_cellular_automata.init_vue ( Vue );
             };
 
         </script>
 
-        <div id="app">
-            {{ fps }}
+        <div id="ca_control">
+            <form>
+                <input type="range" v-model="spont"></input>
+            </form>
         </p>
     </body>
 </html>
