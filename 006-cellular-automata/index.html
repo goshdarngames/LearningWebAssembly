@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8" />
+
+        <link rel="stylesheet" type="text/css" href="style.css" />
         
         <script src="pixi.js" ></script>
 
@@ -11,7 +13,7 @@
 
         <script src="pixi_cellular_automata_main_loop.js" ></script>
 
-        <script src="pixi_cellular_automata_form_handlers.js" ></script>
+        <script src="pixi_cellular_automata_form.js" ></script>
 
         <script src="a.out.js" ></script>
 
@@ -31,10 +33,9 @@
 
         </script>
 
-        <div id="ca_control">
-            <form>
-                <input type="range" v-model="spont"></input>
-            </form>
-        </p>
+        <div id="ca_control" >
+            <input type="range" v-model="spont" width="800px" class="slider"></input>
+            <p>{{scaled_spont}}</p>
+        </div>
     </body>
 </html>

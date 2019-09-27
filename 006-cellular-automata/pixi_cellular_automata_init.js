@@ -7,6 +7,8 @@
 
     pixi_cellular_automata.init_webasm = function ( module )
     {
+        //init c function interface
+
         pixi_cellular_automata.sim_update = module.cwrap ( 'sim_update' );
 
         pixi_cellular_automata.sim_write_rgb_buffer
@@ -27,6 +29,12 @@
 
             return js_array;
         };
+
+        pixi_cellular_automata.sim_set_spont =
+            module.cwrap ( 'set_spont', null, ['number'] )
+
+        pixi_cellular_automata.sim_get_spont =
+            module.cwrap ( 'get_spont', 'number' )
 
     };
 

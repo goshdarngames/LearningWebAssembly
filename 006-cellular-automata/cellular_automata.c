@@ -30,7 +30,7 @@ float sim_get_spont_normalized ()
 
 void sim_set_spont_normalized ( float n )
 {
-    sim_spont = (1/PROB_MAX)*n;
+    sim_spont = PROB_MAX*n;
 }
 
 /****************************************************************************
@@ -149,7 +149,7 @@ void ca_update_running ()
             }
         }
 
-        if ( rand () % PROB_MAX < sim_spont )
+        if ( sim_spont > 0 && rand () % ( PROB_MAX - sim_spont + PROB_MIN ) == 0 )
         {
             next_sim_buffer [ i ] = ( curr_sim_buffer [ i ] + 1 ) % 3;
         }
