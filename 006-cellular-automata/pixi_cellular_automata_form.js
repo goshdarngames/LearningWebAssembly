@@ -1,6 +1,6 @@
 ( function ( pixi_cellular_automata, undefined )
 {
-    let v_spont = 78;
+    let v_spont = 50;
 
     window.addEventListener ( 'load', () =>
     {

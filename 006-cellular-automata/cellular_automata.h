@@ -6,8 +6,8 @@
 
 #define SIZE 640000
 
-#define PROB_MAX 300
-#define PROB_MIN 10
+#define PROB_MAX 6000
+#define PROB_MIN 50
 
 void ca_update ();
 void ca_write_rgb_buffer ( uint8_t * rgb_buffer );

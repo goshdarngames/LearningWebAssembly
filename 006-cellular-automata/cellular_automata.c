@@ -17,7 +17,7 @@ enum SimState { Start, Running };
 
 enum SimState sim_state = Start;
 
-int sim_spont = 5000;
+int sim_spont = PROB_MAX/2;
 
 /****************************************************************************
  * SIMULATION - JS DATA ACCESSOR FUNCTIONS
