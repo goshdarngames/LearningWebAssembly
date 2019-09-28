@@ -57,8 +57,13 @@
 
         document.body.appendChild ( pixi_cellular_automata.pixi_app.view );
 
-        pixi_cellular_automata.get_sim_texture = () =>
+        pixi_cellular_automata.get_sim_texture = ( old_texture ) =>
         {
+            if ( old_texture != undefined )
+            {
+                old_texture.destroy ( true );
+            }
+
             let grid_buffer = pixi_cellular_automata.get_rgb_buffer_ptr  ();
 
             return pixi.Texture.fromBuffer ( 

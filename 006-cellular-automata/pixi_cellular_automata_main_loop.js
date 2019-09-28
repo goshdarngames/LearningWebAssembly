@@ -23,7 +23,10 @@
 
         //set grid_sprite texture to buffer
         pixi_cellular_automata.grid_sprite.texture = 
-            pixi_cellular_automata.get_sim_texture ();
+            pixi_cellular_automata.get_sim_texture (
+                pixi_cellular_automata.grid_sprite.texture 
+            );
+
     };
 
     pixi_cellular_automata.sim_input_spont = function ( val, read_handler )
