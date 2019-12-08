@@ -29,6 +29,8 @@
 
     };
 
+    //When this function is called it adds a sim_input to the queue that
+    //will set the spontaneity of the sim
     pixi_cellular_automata.sim_input_spont = function ( val, read_handler )
     {
         sim_input =
