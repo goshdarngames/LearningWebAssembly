@@ -34,8 +34,13 @@
         </script>
 
         <div id="ca_control" >
+
+            <button v-on:click="pause">{{ pause_button_text }}</button>
+
             <input type="range" v-model="spont" width="800px" class="slider" />
+
             <p>{{scaled_spont}}</p>
+
         </div>
     </body>
 </html>

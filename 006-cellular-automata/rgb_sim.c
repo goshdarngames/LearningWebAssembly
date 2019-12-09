@@ -1,3 +1,6 @@
+//This file defines the functions that are made accessible to the web
+//page through emscripten keep-alive.  Note: in future try embind
+
 #include <emscripten.h>
 
 #include "cellular_automata.h"
@@ -36,5 +39,29 @@ EMSCRIPTEN_KEEPALIVE
 void set_spont ( float n )
 {
     sim_set_spont_normalized ( n );
+}
+
+EMSCRIPTEN_KEEPALIVE
+void set_state ( int s )
+{
+    switch ( s )
+    {
+        case 0 : sim_set_state ( Start   ); break;
+        case 1 : sim_set_state ( Running ); break;
+        case 2 : sim_set_state ( Paused  ); break;
+    }
+}
+
+EMSCRIPTEN_KEEPALIVE
+int get_state ()
+{
+    switch ( sim_get_state () )
+    {
+        case Start   : return 0; break;
+        case Running : return 1; break;
+        case Paused  : return 2; break;
+    }
+
+    return -1;
 }
 

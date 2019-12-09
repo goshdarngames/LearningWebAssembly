@@ -13,7 +13,6 @@ uint8_t sim_buffer_2 [ SIZE ];
 uint8_t * curr_sim_buffer = sim_buffer_1;
 uint8_t * next_sim_buffer = sim_buffer_2;
 
-enum SimState { Start, Running };
 
 enum SimState sim_state = Start;
 
@@ -31,6 +30,16 @@ float sim_get_spont_normalized ()
 void sim_set_spont_normalized ( float n )
 {
     sim_spont = PROB_MAX*n;
+}
+
+void sim_set_state ( enum SimState s )
+{
+    sim_state = s;
+}
+
+enum SimState sim_get_state ()
+{
+    return sim_state;
 }
 
 /****************************************************************************
@@ -149,14 +158,12 @@ void ca_update_running ()
             }
         }
 
-        if ( sim_spont > 0 && rand () % ( PROB_MAX - sim_spont + PROB_MIN ) == 0 )
+        if ( sim_spont > 0 &&
+             rand () % ( PROB_MAX - sim_spont + PROB_MIN ) == 0 )
         {
             next_sim_buffer [ i ] = ( curr_sim_buffer [ i ] + 1 ) % 3;
         }
-
-
     }
-
 }
 
 void ca_update ()
@@ -166,6 +173,8 @@ void ca_update ()
         case Start : ca_update_start (); break;
 
         case Running : ca_update_running (); break;
+
+        case Paused :  break;
     }
 
     flip_sim_buffers ();

@@ -31,10 +31,16 @@
         };
 
         pixi_cellular_automata.sim_set_spont =
-            module.cwrap ( 'set_spont', null, ['number'] )
+            module.cwrap ( 'set_spont', null, ['number'] );
 
         pixi_cellular_automata.sim_get_spont =
-            module.cwrap ( 'get_spont', 'number' )
+            module.cwrap ( 'get_spont', 'number' );
+
+        pixi_cellular_automata.sim_set_state =
+            module.cwrap ( 'set_state', null, [ 'number' ] );
+
+        pixi_cellular_automata.sim_get_state =
+            module.cwrap ( 'get_state', 'number' );
 
     };
 
