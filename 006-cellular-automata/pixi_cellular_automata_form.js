@@ -13,7 +13,7 @@
             data : 
             {
                 spont             : v_spont,
-                pause_button_text : "Play"
+                pause_button_text : "Pause"
             },
             computed :
             {
