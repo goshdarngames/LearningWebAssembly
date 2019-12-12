@@ -17,5 +17,9 @@ int sim_get_neighbour_idx ( int, int, int, int, int );
 
 float sim_get_spont_normalized ();
 void sim_set_spont_normalized ( float n );
+
 void sim_set_state ( enum SimState s );
 enum SimState sim_get_state ();
+
+void sim_set_cell ( int, int, int );
+int sim_get_cell ( int, int );

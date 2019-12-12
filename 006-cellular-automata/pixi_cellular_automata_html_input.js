@@ -5,6 +5,8 @@
     let v_spont = 50;
     let vue = undefined;
 
+    pixi_cellular_automata.pen_state = 0;
+
     window.addEventListener ( 'load', () =>
     {
         vue = new Vue 
@@ -38,6 +40,14 @@
                 pause : function ( event )
                 {
                     pause_button_handler ();
+                },
+                pen_button : function ( s )
+                {
+                    pixi_cellular_automata.pen_state = parseInt ( s );
+                },
+                fill_button : function ( s )
+                {
+                    pixi_cellular_automata.fill_all ( s );
                 }
             }
         });

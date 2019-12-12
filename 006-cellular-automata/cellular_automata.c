@@ -42,6 +42,20 @@ enum SimState sim_get_state ()
     return sim_state;
 }
 
+void sim_set_cell ( int x, int y, int s )
+{
+    int i = ( y*WIDTH ) + x;
+
+    curr_sim_buffer [ i ] = s;
+}
+
+int sim_get_cell ( int x, int y )
+{
+    int i = ( y*WIDTH ) + x;
+
+    return curr_sim_buffer [ i ];
+}
+
 /****************************************************************************
  * SIMULATION - UTILITY FUNCTIONS
  ***************************************************************************/
@@ -105,6 +119,8 @@ void ca_update_start ()
     }
 
     sim_state = Running;
+
+    flip_sim_buffers ();
 }
 
 void ca_update_running ()
@@ -164,6 +180,8 @@ void ca_update_running ()
             next_sim_buffer [ i ] = ( curr_sim_buffer [ i ] + 1 ) % 3;
         }
     }
+
+    flip_sim_buffers ();
 }
 
 void ca_update ()
@@ -176,8 +194,6 @@ void ca_update ()
 
         case Paused :  break;
     }
-
-    flip_sim_buffers ();
 }
 
 /****************************************************************************

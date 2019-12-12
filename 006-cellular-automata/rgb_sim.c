@@ -65,3 +65,15 @@ int get_state ()
     return -1;
 }
 
+EMSCRIPTEN_KEEPALIVE
+void set_cell ( int x, int y, int s )
+{
+    sim_set_cell ( x, y, s );
+}
+
+EMSCRIPTEN_KEEPALIVE
+int get_cell ( int x, int y )
+{
+    return sim_get_cell ( x, y );
+}
+

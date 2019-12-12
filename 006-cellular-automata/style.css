@@ -1,9 +1,21 @@
 #ca_control
 {
-    width : 100%;
+    width : 800px;
+    float : right;
+}
+
+#pen_button_div
+{
+    margin-top : 10px;
+    margin-bottom : 10px;
 }
 
 .slider
 {
     width : 100%;
+}
+
+canvas
+{
+    float : left;
 }

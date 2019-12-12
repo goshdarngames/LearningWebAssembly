@@ -13,7 +13,7 @@
 
         <script src="pixi_cellular_automata_main_loop.js" ></script>
 
-        <script src="pixi_cellular_automata_interaction.js" ></script>
+        <script src="pixi_cellular_automata_html_input.js" ></script>
 
         <script src="a.out.js" ></script>
 
@@ -40,6 +40,19 @@
             <input type="range" v-model="spont" width="800px" class="slider" />
 
             <p>{{scaled_spont}}</p>
+
+            <div>
+
+                    <button v-on:click="fill_button(0)">fill R</button>
+                <button v-on:click="fill_button(1)">fill G</button>
+                <button v-on:click="fill_button(2)">fill B</button>
+
+            </div>
+            <div id="pen_button_div">
+                <button v-on:click="pen_button(0)">draw R</button>
+                <button v-on:click="pen_button(1)">draw G</button>
+                <button v-on:click="pen_button(2)">draw B</button>
+            </div>
 
         </div>
     </body>

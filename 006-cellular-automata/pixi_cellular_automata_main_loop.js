@@ -31,6 +31,17 @@
 
     };
 
+    pixi_cellular_automata.fill_all = function ( s )
+    {
+        for ( let x=0; x<800; x++ )
+        {
+            for ( let y=0; y<800; y++ )
+            {
+                pixi_cellular_automata.sim_set_cell ( x, y, s );
+            }
+        }
+    };
+
     //When this function is called it adds a sim_input to the queue that
     //will set the spontaneity of the sim
     pixi_cellular_automata.sim_input_spont = function ( val, read_handler )
@@ -61,10 +72,33 @@
         let grid_x = Math.floor ( mouse.global.x );
         let grid_y = Math.floor ( mouse.global.y );
 
-        if ( grid_x >= 0 && grid_y >= 0 && grid_x < 800 && grid_y < 800 ) 
+        draw_cells ( grid_x, grid_y, pixi_cellular_automata.pen_state, 50 );
+    }
+
+    let draw_cells = function ( x, y, s, r )
+    {
+
+        for ( let o_x = (r*-1); o_x++; o_x < r )
         {
-            console.log ( "x:"+grid_x + ", "+ "y:"+grid_y );
+            let b_x = x+o_x;
+
+            for ( let o_y = (r*-1); o_y++; o_y < r )
+            {
+                let b_y = y+o_y;
+
+                // 'magic_mode' - needs to have a cooldown for same cell
+                //let curr = pixi_cellular_automata.sim_get_cell ( b_x, b_y );
+                //let next = (curr+1)%3;
+
+                next = s;
+
+                if ( b_x >= 0 && b_y >= 0 && b_x < 800 && b_y < 800 ) 
+                {
+                    pixi_cellular_automata.sim_set_cell ( b_x, b_y, next );
+                }
+            };
         }
+        
     }
 
 } ( window.pixi_cellular_automata = window.pixi_cellular_automata || {} ))

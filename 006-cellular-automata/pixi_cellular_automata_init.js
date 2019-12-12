@@ -42,6 +42,13 @@
         pixi_cellular_automata.sim_get_state =
             module.cwrap ( 'get_state', 'number' );
 
+        pixi_cellular_automata.sim_set_cell =
+            module.cwrap ( 'set_cell', null, 
+                            [ 'number', 'number', 'number']);
+
+        pixi_cellular_automata.sim_get_cell =
+            module.cwrap ( 'get_cell', 'number' );
+
     };
 
     pixi_cellular_automata.init_pixi = function ( pixi, document )
