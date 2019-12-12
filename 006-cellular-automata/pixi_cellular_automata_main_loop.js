@@ -3,8 +3,10 @@
     //inputs to be sent from page to the sim
     let sim_inputs = [];
 
-    pixi_cellular_automata.mainLoop = function ()
+    pixi_cellular_automata.mainLoop = function ( pixi_app )
     {
+        poll_mouse ( pixi_app.renderer.plugins.interaction.mouse );
+
         //check for input from form
 
         sim_inputs.forEach ( ( sim_input ) =>
@@ -46,6 +48,23 @@
         };
 
         sim_inputs.push ( sim_input );
+    }
+
+    let poll_mouse = function ( mouse )
+    {
+        //exit it mouse main button not down
+        if ( mouse.buttons != 1 )
+        {
+            return;
+        }
+
+        let grid_x = Math.floor ( mouse.global.x );
+        let grid_y = Math.floor ( mouse.global.y );
+
+        if ( grid_x >= 0 && grid_y >= 0 && grid_x < 800 && grid_y < 800 ) 
+        {
+            console.log ( "x:"+grid_x + ", "+ "y:"+grid_y );
+        }
     }
 
 } ( window.pixi_cellular_automata = window.pixi_cellular_automata || {} ))

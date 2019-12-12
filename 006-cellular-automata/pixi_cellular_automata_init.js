@@ -55,13 +55,13 @@
 
         PIXI.utils.sayHello ( type );
 
-        pixi_cellular_automata.pixi_app = new PIXI.Application (
-            {
-                width  : 800,
-                height : 800
-            });
+        pixi_app = new PIXI.Application (
+        {
+            width  : 800,
+            height : 800
+        });
 
-        document.body.appendChild ( pixi_cellular_automata.pixi_app.view );
+        document.body.appendChild ( pixi_app.view );
 
         pixi_cellular_automata.get_sim_texture = ( old_texture ) =>
         {
@@ -80,12 +80,11 @@
         pixi_cellular_automata.grid_sprite = 
             new pixi.Sprite ( pixi_cellular_automata.get_sim_texture () );
 
-        pixi_cellular_automata.pixi_app.stage.addChild ( 
-            pixi_cellular_automata.grid_sprite );
+        pixi_app.stage.addChild ( pixi_cellular_automata.grid_sprite );
 
-        pixi_cellular_automata.pixi_app.ticker.add ( () =>
+        pixi_app.ticker.add ( () =>
         {
-            pixi_cellular_automata.mainLoop ();
+            pixi_cellular_automata.mainLoop ( pixi_app );
         });
     };
 
