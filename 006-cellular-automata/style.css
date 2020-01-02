@@ -1,21 +1,80 @@
 #ca_control
 {
-    width : 800px;
-    float : right;
+    width       : 400px;
+    float       : left;
+    margin-left : 80px;
+    margin-right : 80px;
+    background-color : coral;
+    display : table;
 }
 
 #pen_button_div
 {
-    margin-top : 10px;
+    margin-top    : 10px;
     margin-bottom : 10px;
 }
 
 .slider
 {
+    width : 80%;
+}
+
+#slider_div
+{
+    display : table-row;
+    padding : 100px;
+}
+
+button
+{
+    background-color : #AA22CC;
+    border-style: dotted;
+    margin-left : auto;
+    margin-right : auto;
+    margin-top : 20px;
+    margin-bottom : 20px;
+    display      : block;
+}
+
+div
+{
+    text-align: center;
+}
+
+#play_button
+{
+    width : 80px;
+    height : 80px;
+    border-radius: 50%;
+    display : table-row;
+}
+
+.fill_button
+{
+    display : table-cell;
+}
+
+.draw_button
+{
+    display : table-cell;
+}
+
+.pen_button_div
+{
     width : 100%;
+    display : table-row;
+    margin-left : auto;
+    margin-right : auto;
 }
 
 canvas
 {
-    float : left;
+    float       : left;
+    margin-left : 80px%;
+    margin-top  : 80px%;
+}
+
+body 
+{
+    background-color: #222f20;
 }

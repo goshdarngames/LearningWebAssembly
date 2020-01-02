@@ -64,7 +64,7 @@
     let poll_mouse = function ( mouse )
     {
         //exit it mouse main button not down
-        if ( mouse.buttons != 1 )
+        if ( mouse.pointerType == "mouse" &&  mouse.buttons != 1 )
         {
             return;
         }
@@ -73,6 +73,7 @@
         let grid_y = Math.floor ( mouse.global.y );
 
         draw_cells ( grid_x, grid_y, pixi_cellular_automata.pen_state, 50 );
+
     }
 
     let draw_cells = function ( x, y, s, r )

@@ -35,23 +35,28 @@
 
         <div id="ca_control" >
 
-            <button v-on:click="pause">{{ pause_button_text }}</button>
+            <button id="play_button" v-on:click="pause">{{ pause_button_text }}</button>
 
-            <input type="range" v-model="spont" width="800px" class="slider" />
 
-            <p>{{scaled_spont}}</p>
+            <div id="slider_div">
 
-            <div>
-
-                    <button v-on:click="fill_button(0)">fill R</button>
-                <button v-on:click="fill_button(1)">fill G</button>
-                <button v-on:click="fill_button(2)">fill B</button>
-
+                <h2>Spontaneity</h2>
+                <input type="range" v-model="spont"  class="slider" />
+                <p>{{scaled_spont}}</p>
             </div>
-            <div id="pen_button_div">
-                <button v-on:click="pen_button(0)">draw R</button>
-                <button v-on:click="pen_button(1)">draw G</button>
-                <button v-on:click="pen_button(2)">draw B</button>
+
+            <div class="pen_button_div">
+                <button class="draw_button" v-on:click="pen_button(0)">draw R</button>
+                <button class="draw_button" v-on:click="pen_button(1)">draw G</button>
+                <button class="draw_button" v-on:click="pen_button(2)">draw B</button>
+            </div>
+
+            <div class="pen_button_div">
+
+                <button class="fill_button" v-on:click="fill_button(0)">fill R</button>
+                <button class="fill_button" v-on:click="fill_button(1)">fill G</button>
+                <button class="fill_button" v-on:click="fill_button(2)">fill B</button>
+
             </div>
 
         </div>
