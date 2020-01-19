@@ -45,19 +45,21 @@
                 <p>{{scaled_spont}}</p>
             </div>
 
-            <div class="pen_button_div">
-                <button class="draw_button" v-on:click="pen_button(0)">draw R</button>
-                <button class="draw_button" v-on:click="pen_button(1)">draw G</button>
-                <button class="draw_button" v-on:click="pen_button(2)">draw B</button>
+            <div id="pen_button_div" >
+                <button class="draw_button" style="background-color:#F00" v-on:click="pen_button(0)">draw R</button>
+                <button class="draw_button" style="background-color:#0F0" v-on:click="pen_button(1)">draw G</button>
+                <button class="draw_button" style="background-color:#00F" v-on:click="pen_button(2)">draw B</button>
             </div>
 
-            <div class="pen_button_div">
+            <div id="fill_button_div" >
 
-                <button class="fill_button" v-on:click="fill_button(0)">fill R</button>
-                <button class="fill_button" v-on:click="fill_button(1)">fill G</button>
-                <button class="fill_button" v-on:click="fill_button(2)">fill B</button>
+                <button class="fill_button" style="background-color:red" v-on:click="fill_button(0)">fill R</button>
+                <button class="fill_button" style="background-color:green" v-on:click="fill_button(1)">fill G</button>
+                <button class="fill_button" style="background-color:blue" v-on:click="fill_button(2)">fill B</button>
 
             </div>
+
+            <button id="random_button" v-on:click="random">Randomize</button>
 
         </div>
     </body>

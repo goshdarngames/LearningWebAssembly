@@ -41,6 +41,10 @@
                 {
                     pause_button_handler ();
                 },
+                random : function ( event )
+                {
+                    random_button_handler ();
+                },
                 pen_button : function ( s )
                 {
                     pixi_cellular_automata.pen_state = parseInt ( s );
@@ -75,6 +79,23 @@
                 }
 
             }
+        }
+        catch ( err )
+        {
+            console.log ( err );
+        }
+        finally
+        {
+            delayed_pause_text_update ();
+        }
+    };
+
+    //lazy hack to add ranomizer by setting state
+    let random_button_handler = function ()
+    {
+        try 
+        {
+            pixi_cellular_automata.sim_set_state ( 0 );
         }
         catch ( err )
         {
